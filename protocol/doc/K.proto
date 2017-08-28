@@ -1,0 +1,84 @@
+package com.randioo.market_server.protocol;
+import "Entity.proto";
+
+message KRequest{//刚进入根据服务器请求的协议查看K
+ 	optional string type=1;
+ 	optional int32 sumDay=2;
+	
+}
+message KResponse{
+	optional int32 errorCode=1 [default = 1];
+	repeated KData KData=2;//K线数据
+	optional int32 firstDay=3;//初始天
+	optional int32 highPrice=4;//最高价
+	optional int32 lowPrice=5;//最低价
+	optional int32 timePrice=6;//当前价格
+}
+
+message DayClickRequest{//点击日K图的请求 和 每天定时请求一次日K
+	optional string type=1;//类型
+}
+
+message DayClickResponse{
+	optional int32 errorCode=1 [default = 1];
+	repeated KData KData=2;//日K图
+	optional int32 firstDay=3;
+	optional int32 highPrice=4;
+	optional int32 lowPrice=5;
+}
+message MinkClickRequest{//点击5分钟的时候请求当天5分K线图所有数据
+	optional string type=1;
+}
+message MinkClickResponse{//点击5分钟的返回
+	optional int32 errorCode=1 [default = 1];
+	repeated KData KData=2;//分K图
+	optional int32 highPrice=3;
+	optional int32 lowPrice=4;
+}
+
+message SCRefushMink{//每秒刷新主推
+	repeated KData KData=1;
+	optional int32 highPrice=2;
+	optional int32 lowPrice=3;
+}
+message OneMinkRequest{
+	optional string type=1;
+}
+
+message OneMinkResponse{
+	optional int32 errorCode=1 [default = 1];
+	repeated KData KData=2;//分K图
+	optional int32 highPrice=3;
+	optional int32 lowPrice=4;
+}
+message FifMinkRequest{
+	optional string type=1;
+}
+
+message FifMinkResponse{
+	optional int32 errorCode=1 [default = 1];
+	repeated KData KData=2;//分K图
+	optional int32 highPrice=3;
+	optional int32 lowPrice=4;
+}
+message ThirtyMinkRequest{
+	optional string type=1;
+}
+
+message ThirtyMinkResponse{
+	optional int32 errorCode=1 [default = 1];
+	repeated KData KData=2;//分K图
+	optional int32 highPrice=3;
+	optional int32 lowPrice=4;
+}
+
+message SixMinkRequest{
+	optional string type=1;
+}
+
+message SixMinkResponse{
+	optional int32 errorCode=1 [default = 1];
+	repeated KData KData=2;//分K图
+	optional int32 highPrice=3;
+	optional int32 lowPrice=4;
+}

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.randioo.market_server.dao.BuyerDAO">
+	<!-- insert -->
+	<insert id="insert" parameterType="BuyerBO">
+		insert into Buyer(
+		buy_id,
+		buy_account,
+		buy_price,
+		buy_count,
+		buy_type,
+		buy_time
+		) values(
+		#{buy_id},
+		#{buy_account},
+		#{buy_price},
+		#{buy_count},
+		#{buy_type},
+		#{buy_time}
+		)
+	</insert>
+	<!-- update -->
+	<update id="update">
+		update
+		buyer
+		set
+		buy_id=#{buy_id},
+		buy_account=#{buy_account},
+		buy_price=#{buy_price},
+		buy_count=#{buy_count},
+		buy_type=#{buy_type},
+		buy_time=#{buy_time}
+		where
+		buy_id=#{buy_id}
+	</update>
+
+	<!-- select -->
+	<select id="selectListByUser" resultType="BuyerBO">
+		select
+		buy_id as buy_id,
+		buy_account as buy_account,
+		buy_price as buy_price,
+		buy_count as buy_count,
+		buy_type as
+		buy_type,
+		buy_time as buy_time
+		from
+		buyer
+		where
+		buy_account=#{buy_account}
+	</select>
+
+	<!-- select -->
+	<select id="selectId" resultType="int">
+		select 
+			max(buy_id)
+		from 
+			buyer 
+	</select>
+	
+	<!-- select -->
+	<select id="selectList" resultType="BuyerBO">
+		select
+		buy_id=#{buy_id},
+		buy_account=#{buy_account},
+		buy_price=#{buy_price},
+		buy_count=#{buy_count},
+		buy_type=#{buy_type},
+		buy_time=#{buy_time}
+		from
+		buyer
+		where
+		buy_id=#{buy_id}
+	</select>
+</mapper>

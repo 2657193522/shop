@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd 
+    http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd 
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd 
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+	<bean id="schedulerManager"
+		class="com.randioo.randioo_server_base.scheduler.SchedulerManager">
+		<property name="schedulers">
+			<list>
+				<ref bean="roleDataScheduler" />
+			</list>
+		</property>
+	</bean>
+	<bean id="systemHttpServlet"
+		class="com.randioo.market_server.http.servlet.SystemHttpServlet" />
+	<bean id="switchScheduler" class="com.randioo.market_server.scheduler.SwitchScheduler" />
+	<bean id="kAction" class="com.randioo.market_server.module.k.action.KAction" />
+	<bean id="serviceManager" class="com.randioo.randioo_server_base.service.ServiceManager">
+		<property name="services">
+			<list>
+				<ref bean="loginService" />
+				<ref bean="sellerLogicNumComponent" />
+				<ref bean="sellerDeleteService" />
+				<ref bean="sellerInsertService" />
+				<ref bean="sellerSelectService" />
+				<ref bean="systemService" />
+				<ref bean="roleService" />
+				<ref bean="loginService" />
+				<ref bean="kService" />
+				<ref bean="goodsService" />
+				<ref bean="dealService" />
+				<ref bean="buyerInsertService" />
+				<ref bean="buyerLevelComponent" />
+				<ref bean="buyerNumComponent" />
+				<ref bean="buyerRoleComponent" />
+				<ref bean="insertTradingComponent" />
+				<ref bean="sellerCacheComponent" />
+				<ref bean="numService" />
+				<ref bean="httpServletService" />
+				<ref bean="scService" />
+				<ref bean="daykClickService" />
+				<ref bean="minkClickService" />
+				<ref bean="daykClickService" />
+				<ref bean="thirtyMinkService" />
+				<ref bean="sixtyMinkService" />
+				<ref bean="ontMinkService" />
+				
+			</list>
+		</property>
+	</bean>
+</beans>

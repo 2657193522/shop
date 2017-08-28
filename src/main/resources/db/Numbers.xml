@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.randioo.market_server.dao.NumberDAO">
+	<!-- insert -->
+	<insert id="insert" parameterType="NumbersBO">
+		insert into number(
+		num_id,
+		num_account,
+		num_type,
+		num_count,
+		operation_count,
+		operation_time
+		) values(
+		#{num_id},
+		#{num_account},
+		#{num_type},
+		#{num_count},
+		#{operation_count},
+		#{operation_time}
+		)
+	</insert>
+	<!-- update -->
+	<update id="update">
+		update
+		number
+		set
+		num_id=#{num_id},
+		num_account=#{num_account},
+		num_type=#{num_type},
+		num_count=#{num_count},
+		operation_count=#{operation_count},
+		operation_time=#{operation_time}
+		where
+		num_id=#{num_id}
+	</update>
+
+	<update id="updateCount">
+		update
+		number
+		set
+		num_id=#{num_id},
+		num_account=#{num_account},
+		num_type=#{num_type},
+		num_count=#{num_count},
+		operation_count=#{operation_count},
+		operation_time=#{operation_time}
+		where
+		num_id=#{num_id}
+		and
+		num_type=#{num_type}
+	</update>
+
+	<!-- select -->
+	<select id="selectNumber" resultType="NumbersBO">
+		select
+		num_id as num_id,
+		num_account as num_account,
+		num_type as num_type,
+		num_count as
+		num_count,
+		operation_count as operation_count,
+		operation_time as
+		operation_time
+		from
+		number
+		where
+		num_id=#{num_id}
+		and
+		num_type=#{num_type}
+	</select>
+	<!-- select -->
+
+	<!-- select -->
+	<select id="getNum" resultType="NumbersBO">
+		select
+		num_id as num_id,
+		num_account as num_account,
+		num_type as num_type,
+		num_count as
+		num_count,
+		operation_count as operation_count,
+		operation_time as
+		operation_time
+		from
+		number
+	</select>
+	<!-- select -->
+	<select id="selectId" resultType="int">
+		select
+		max(num_id)
+		from
+		number
+	</select>
+	<!-- select -->
+	<select id="selectList" resultType="NumbersBO">
+		select
+		num_id as num_id,
+		num_account as num_account,
+		num_type as num_type,
+		num_count as
+		num_count,
+		operation_count as operation_count,
+		operation_time as
+		operation_time
+		from
+		number
+		where
+		num_id=#{num_id}
+	</select>
+</mapper>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.randioo.market_server.dao.MinkDAO">
+	<!-- insert -->
+	<insert id="insert" parameterType="MinkBO">
+		insert into
+		mink(
+		min_id,
+		min_max_price,
+		min_min_price,
+		min_sum_price,
+		min_sum_count,
+		min_percentage,
+		min_start_price,
+		min_end_price,
+		min_time,
+		min_type)
+		values(
+		#{min_id},
+		#{min_max_price},
+		#{min_min_price},
+		#{min_sum_price},
+		#{min_sum_count},
+		#{min_percentage},
+		#{min_start_price},
+		#{min_end_price},
+		#{min_time},
+		#{min_type}
+		)
+	</insert>
+	<!-- update -->
+	<update id="update">
+		update
+		mink
+		set
+		min_id=#{min_id},
+		min_max_price=#{min_max_price},
+		min_min_price=#{min_min_price},
+		min_sum_price=#{min_sum_price},
+		min_sum_count=#{min_sum_count},
+		min_percentage=#{min_percentage},
+		min_start_price=#{min_start_price},
+		min_end_price#{min_end_price},
+		min_time=#{min_time},
+		min_type as
+		min_type
+		where
+		min_id=#{min_id}
+	</update>
+	<!-- select -->
+
+	<!-- select -->
+	<select id="selectId" resultType="int">
+		select
+		max(min_id)
+		from
+		mink
+
+	</select>
+	<!-- select -->
+	<select id="selectList" resultType="MinkBO">
+		select
+		min_id as min_id,
+		min_max_price as min_max_price,
+		min_min_price as min_min_price,
+		min_sum_price as
+		min_sum_price,
+		min_sum_count as min_sum_count,
+		min_percentage as min_percentage,
+		min_start_price as
+		min_start_price,
+		min_end_price as min_end_price,
+		min_time as min_time,
+		min_type as
+		min_type
+		from
+		mink
+		where
+		min_id=#{min_id}
+	</select>
+	<select id="getLastMink" resultType="MinkBO">
+		select
+		min_id as min_id,
+		min_max_price as min_max_price,
+		min_min_price as min_min_price,
+		min_sum_price as
+		min_sum_price,
+		min_sum_count as min_sum_count,
+		min_percentage as min_percentage,
+		min_start_price as
+		min_start_price,
+		min_end_price as min_end_price,
+		min_time as min_time,
+		min_type as
+		min_type
+		from
+		mink
+		where
+		min_type=#{min_type}
+		and to_days(min_time) =
+		to_days(now())
+		order by min_id desc limit 1
+	</select>
+	<select id="getNowDay" resultType="MinkBO">
+		select
+		min_id as min_id,
+		min_max_price as min_max_price,
+		min_min_price as min_min_price,
+		min_sum_price as
+		min_sum_price,
+		min_sum_count as min_sum_count,
+		min_percentage as min_percentage,
+		min_start_price as
+		min_start_price,
+		min_end_price as min_end_price,
+		min_time as min_time,
+		min_type as
+		min_type
+		from
+		mink
+		where
+		min_type=#{min_type} order by min_id desc limit
+		48
+
+	</select>
+
+	<!-- select -->
+
+
+
+	<select id="getMinK" resultType="MinkBO">
+		select
+		min_id as min_id,
+		min_max_price as min_max_price,
+		min_min_price as min_min_price,
+		min_sum_price as
+		min_sum_price,
+		min_sum_count as min_sum_count,
+		min_percentage as min_percentage,
+		min_start_price as
+		min_start_price,
+		min_end_price as min_end_price,
+		min_time as min_time,
+		min_type as
+		min_type
+		from
+		mink
+		where
+		min_id=#{min_id}
+	</select>
+
+	<select id="getEndMink" resultType="MinkBO">
+		select
+		min_id as min_id,
+		min_max_price as min_max_price,
+		min_min_price as min_min_price,
+		min_sum_price as
+		min_sum_price,
+		min_sum_count as min_sum_count,
+		min_percentage as min_percentage,
+		min_start_price as
+		min_start_price,
+		min_end_price as min_end_price,
+		min_time as min_time,
+		min_type as
+		min_type
+		from
+		mink
+		where
+		min_type=#{min_type}
+		order by min_id desc limit 1
+	</select>
+
+</mapper>

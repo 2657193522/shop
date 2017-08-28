@@ -1,0 +1,33 @@
+package com.randioo.market_server.protocol;
+import "Entity.proto";
+
+message GoodsTyRequest{//根据类型请求所有出售信息，和当前的信息
+	optional string goodsType=1;//请求类型
+}
+message GoodsTyResponse{//返回
+	optional int32 errorCode=1 [default = 1];
+	repeated GoodsTypeData GoodsTypeData=2;//所有出售信息
+	optional int32 startPrice=3;//开盘价格
+	optional int32 addPrice=4;//涨停价格
+	optional int32 downPrice=5;//跌停价格
+	optional string type=6;//总姓
+	optional string typeName=7;//总姓名称
+	optional int32 count=8;//成交量
+	optional int32 timePrice=9;//当前价格
+	optional int32 gains=10;//涨跌率
+	optional string poundage=11;//手续费
+	optional int32  maxCount=12;//成交最大数
+	optional int32 sumPrice=13;//总价
+	optional int32 junjia=14;//均价
+
+}
+message SCGoodsType{//界面显示信息主推
+	repeated GoodsTypeData GoodsTypeData=1;//所有出售信息
+	optional int32 count=2;//成交量
+	optional int32 timePrice=3;//当前价格
+	optional int32 gains=4;//涨跌率
+	optional int32 sumPrice=5;//总价
+	optional int32 junjia=6;//均价
+}
+
+

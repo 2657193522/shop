@@ -1,0 +1,14 @@
+package com.randioo.market_server.protocol;
+import "Entity.proto";
+
+message SystemInfoRequest{//系统
+	
+}
+
+message SystemInfoResponse{
+	optional int32 errorCode=1 [default = 1];
+	optional string serTime=2;//系统时间
+	optional string state=3;//状态
+	optional string startTime=4;//开市时间
+	optional string endTime=5;//关市时间
+}

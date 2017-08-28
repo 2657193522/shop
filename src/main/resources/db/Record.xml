@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.randioo.market_server.dao.RecordDAO">
+	<!-- insert -->
+	<insert id="insert" parameterType="RecordBO">
+		insert into record(
+		record_id,
+		start_count,
+		end_count,
+		start_rmb,
+		end_rmb,
+		time,
+		count,
+		rmb,
+		type,
+		account,
+		state
+		) values(
+		#{record_id},
+		#{start_count},
+		#{end_count},
+		#{start_rmb},
+		#{end_rmb},
+		#{time},
+		#{count},
+		#{rmb},
+		#{type},
+		#{account},
+		#{state}
+		)
+	</insert>
+	<!-- update -->
+	<update id="update">
+		update
+		record
+		set
+		start_count=#{start_count},
+		end_count=#{end_count},
+		start_rmb=#{start_rmb},
+		end_rmb=#{end_rmb},
+		time=#{time},
+		count=#{count},
+		rmb=#{rmb},
+		type=#{type},
+		account=#{account},
+		state=#{state}
+		where
+		record_id=#{record_id}
+	</update>
+
+	<!-- select -->
+	<select id="selectList" resultType="RecordBO">
+		select
+		start_count as
+		start_count,
+		end_count as end_count,
+		start_rmb as start_rmb,
+		end_rmb as
+		end_rmb,
+		time as time,
+		count as count,
+		rmb as rmb,
+		type as type,
+		account as
+		account,
+		state as state
+		from
+		record
+		where
+		record_id=#{record_id}
+	</select>
+</mapper>

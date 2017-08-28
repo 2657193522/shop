@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.randioo.market_server.dao_remote.CurencyUserDAO">
+		<!-- update -->
+	<update id="jianUpdate">
+		update
+		yang_currency_user
+		set
+		num=num-#{num}
+		where
+		member_id=#{member_id}
+		and
+		currency_id=#{currency_id}
+	</update>
+
+	<update id="addUpdate">
+		update
+		yang_currency_user
+		set
+		num=num+#{num}
+		where
+		member_id=#{member_id}
+		and
+		currency_id=#{currency_id}
+	</update>
+	
+</mapper>

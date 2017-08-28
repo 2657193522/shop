@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.randioo.market_server.dao.GoodsDAO">
+	<!-- insert -->
+	<insert id="insert" parameterType="GoodsBO">
+		insert into goods(
+		goods_id,
+		goods_account,
+		goods_num,
+		goods_type,
+		goods_price,
+		goods_sell_id,
+		goods_active,
+		goods_time,
+		goods_trad_id
+		) values(
+		#{goods_id},
+		#{goods_account},
+		#{goods_num},
+		#{goods_type},
+		#{goods_price},
+		#{goods_sell_id},
+		#{goods_active},
+		#{goods_time},
+		#{goods_trad_id}
+		)
+	</insert>
+	<!-- update -->
+
+	<update id="update">
+		update
+		goods
+		set
+		goods_id=#{goods_id},
+		goods_account=#{goods_account},
+		goods_num=#{goods_num},
+		goods_type=#{goods_type},
+		goods_price=#{goods_price},
+		goods_sell_id=#{goods_sell_id},
+		goods_active=#{goods_active},
+		goods_time=#{goods_time},
+		goods_trad_id=#{goods_trad_id}
+		where
+		goods_id=#{goods_id}
+	</update>
+	<!-- select -->
+	<select id="selectListByType" resultType="GoodsBO">
+		select
+		goods_id as
+		goods_id,
+		goods_account as goods_account,
+		goods_num as goods_num,
+		goods_type as goods_type,
+		goods_price as
+		goods_price,
+		goods_sell_id as
+		goods_sell_id,
+		goods_active as goods_active,
+		goods_time as goods_time,
+		goods_trad_id as goods_trad_id
+		from
+		goods
+		where
+		goods_type=#{goods_type}
+	</select>
+	<!-- update -->
+	<update id="updateGoodsActive">
+		update
+		goods
+		set
+		goods_active=#{goods_active}
+		where
+		goods_sell_id=#{goods_sell_id}
+	</update>
+
+	<!-- select -->
+	<select id="selectList" resultType="GoodsBO">
+		select
+		goods_id as
+		goods_id,
+		goods_account as goods_account,
+		goods_num as goods_num,
+		goods_type as
+		goods_type,
+		goods_price as
+		goods_price,
+		goods_sell_id as goods_sell_id,
+		goods_active as goods_active,
+		goods_time as goods_time,
+		goods_trad_id as
+		goods_trad_id
+		from
+		goods
+		where
+		goods_account=#{goods_account}
+	</select>
+	<!-- select -->
+	<select id="selectListByTrad" resultType="GoodsBO">
+		select
+		goods_id as
+		goods_id,
+		goods_account as goods_account,
+		goods_num as goods_num,
+		goods_type as goods_type,
+		goods_price as
+		goods_price,
+		goods_sell_id as
+		goods_sell_id,
+		goods_active as goods_active,
+		goods_time as goods_time,
+		goods_trad_id as goods_trad_id
+		from
+		goods
+		where
+		goods_trad_id=#{goods_trad_id}
+	</select>
+	<select id="selectGoods" resultType="GoodsBO">
+		select
+		goods_id as
+		goods_id,
+		goods_account as goods_account,
+		goods_num as goods_num,
+		goods_type as
+		goods_type,
+		goods_price as
+		goods_price,
+		goods_sell_id as goods_sell_id,
+		goods_active as goods_active,
+		goods_time as goods_time,
+		goods_trad_id as
+		goods_trad_id
+		from
+		goods
+		where
+		goods_id=#{goods_id}
+	</select>
+	<select id="selectTypeByAll" resultType="GoodsBO">
+		select
+		goods_id as
+		goods_id,
+		goods_account as goods_account,
+		goods_num as goods_num,
+		goods_type as goods_type,
+		goods_price as
+		goods_price,
+		goods_sell_id as
+		goods_sell_id,
+		goods_active as goods_active,
+		goods_time as goods_time,
+		goods_trad_id as goods_trad_id
+		from
+		goods
+		where
+		goods_sell_id=#{goods_sell_id}
+		and
+		goods_active=#{goods_active}
+	</select>
+	<!-- select -->
+
+	<select id="selectListByTypeUser" resultType="GoodsBO">
+		select
+		goods_id as
+		goods_id,
+		goods_account as goods_account,
+		goods_num as goods_num,
+		goods_type as goods_type,
+		goods_price as
+		goods_price,
+		goods_sell_id as
+		goods_sell_id,
+		goods_active as goods_active,
+		goods_time as goods_time,
+		goods_trad_id as goods_trad_id
+		from
+		goods
+		where
+		goods_type=#{goods_type}
+		and
+		goods_account=#{goods_account}
+		and
+		goods_active=#{goods_active}
+	</select>
+
+	<update id="updateGoodsSeller">
+		update
+		goods
+		set
+		goods_price=#{goods_price},
+		goods_sell_id=#{goods_sell_id},
+		goods_active=#{goods_activey},
+		goods_time=#{goods_time}
+		where
+		goods_type=#{goods_type}
+		and
+		goods_account=#{goods_account}
+		and
+		goods_active=#{goods_activen}
+		order by goods_id limit #{count}
+	</update>
+
+	<update id="updateGoodsBuyer">
+		update
+		goods
+		set
+		goods_account=#{goods_account},
+		goods_active=#{goods_activen},
+		goods_trad_id=#{goods_trad_id},
+		goods_time=#{goods_time}
+		where
+		goods_sell_id=#{goods_sell_id}
+		and
+		goods_active=#{goods_activey}
+		order by goods_id limit #{count}
+	</update>
+
+	<update id="updateGoodsRevoke">
+		update
+		goods
+		set
+		goods_active=#{goods_activen},
+		goods_time=#{goods_time}
+		where
+		goods_sell_id=#{goods_sell_id}
+		and
+		goods_active=#{goods_activey}
+		order by goods_id limit #{count}
+	</update>
+
+
+</mapper>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.randioo.market_server.dao.SellerDAO">
+	<!-- insert -->
+	<insert id="insert" parameterType="SellerBO">
+		insert into seller(
+		sell_id,
+		sell_account,
+		sell_count,
+		sell_price,
+		sell_type,
+		sell_sum,
+		sell_time,
+		sell_overCount,
+		sell_active
+		) values(
+		#{sell_id},
+		#{sell_account},
+		#{sell_count},
+		#{sell_price},
+		#{sell_type},
+		#{sell_sum},
+		#{sell_time},
+		#{sell_overCount},
+		#{sell_active}
+		)
+	</insert>
+
+	<!-- update -->
+	<update id="update">
+		update
+		seller
+		set
+		sell_id=#{sell_id},
+		sell_account=#{sell_account},
+		sell_count=#{sell_count},
+		sell_price=#{sell_price},
+		sell_type=#{sell_type},
+		sell_sum=#{sell_sum},
+		sell_time=#{sell_time},
+		sell_overCount=#{sell_overCount},
+		sell_active=#{sell_active}
+		where
+		sell_id=#{sell_id}
+	</update>
+
+
+	<!-- update -->
+	<update id="updateActive">
+		update
+		seller
+		set
+		sell_active=#{sell_active}
+		where
+		sell_id=#{sell_id}
+	</update>
+	<!-- select -->
+	<select id="selectList" resultType="SellerBO">
+		select
+		sell_id as sell_id,
+		sell_account as sell_account,
+		sell_count as sell_count,
+		sell_price as
+		sell_price,
+		sell_type as sell_type,
+		sell_sum as sell_sum,
+		sell_time as
+		sell_time,
+		sell_overCount as sell_overCount,
+		sell_active as sell_active
+		from
+		seller
+		where
+		sell_id=#{sell_id}
+	</select>
+
+	<select id="selectSellerByState" resultType="SellerBO">
+		select
+		sell_id as
+		sell_id,
+		sell_account as sell_account,
+		sell_count as sell_count,
+		sell_price as
+		sell_price,
+		sell_type as sell_type,
+		sell_sum as sell_sum,
+		sell_time as
+		sell_time,
+		sell_overCount as sell_overCount,
+		sell_active as
+		sell_active
+		from
+		seller
+		where
+		sell_active=#{sell_active}
+	</select>
+
+	<select id="selectSeller" resultType="SellerBO">
+		select
+		sell_id as sell_id,
+		sell_account as sell_account,
+		sell_count as sell_count,
+		sell_price as
+		sell_price,
+		sell_type as sell_type,
+		sell_sum as sell_sum,
+		sell_time as
+		sell_time,
+		sell_overCount as sell_overCount,
+		sell_active as sell_active
+		from
+		seller
+		where
+		sell_id=#{sell_id}
+	</select>
+	<!-- select -->
+	<select id="selectId" resultType="int">
+		select
+		max(sell_id)
+		from
+		seller
+	</select>
+	<!-- select -->
+	<select id="getListByAccount" resultType="SellerBO">
+		select
+		sell_id as
+		sell_id,
+		sell_account as sell_account,
+		sell_count as sell_count,
+		sell_price as sell_price,
+		sell_type as sell_type,
+		sell_sum as sell_sum,
+		sell_time as sell_time,
+		sell_overCount as sell_overCount,
+		sell_active as
+		sell_active
+		from
+		seller
+		where
+		sell_account=#{sell_account}
+		and
+		sell_active=#{sell_active}
+	</select>
+
+	<select id="selectSellerByAll" resultType="SellerBO">
+		select
+		sell_id as
+		sell_id,
+		sell_account as sell_account,
+		sell_count as sell_count,
+		sell_price as sell_price,
+		sell_type as sell_type,
+		sell_sum as sell_sum,
+		sell_time as sell_time,
+		sell_overCount as sell_overCount,
+		sell_active as
+		sell_active
+		from
+		seller
+		where
+		sell_id=#{sell_id}
+		and
+		sell_active=#{sell_active}
+	</select>
+	<!-- select -->
+	<select id="ListByType" resultType="SellerBO">
+		select
+		sell_id as sell_id,
+		sell_account as sell_account,
+		sell_count as sell_count,
+		sell_price as
+		sell_price,
+		sell_type as sell_type,
+		sell_sum as sell_sum,
+		sell_time as
+		sell_time,
+		sell_overCount as sell_overCount,
+		sell_active as sell_active
+		from
+		seller
+		where
+		sell_type=#{sell_type}
+		and
+		sell_active=#{sell_active}
+	</select>
+</mapper>

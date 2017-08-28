@@ -1,0 +1,50 @@
+package com.randioo.market_server.protocol;
+
+enum ErrorCode{
+
+	//通用
+
+	OK = 1;//成功
+	NO_STRING = 2;//字符串为空
+
+
+	//登录
+
+	NO_ROLE_ACCOUNT = 3;//没有该帐号
+	EXIST_ROLE = 4;//已经存在用户
+	CREATE_FAILED = 5;//创建失败
+	REJECT_LOGIN = 6;//拒绝登陆
+	ACCOUNT_ILLEGEL = 7;//帐号不合法，只能是英文字母
+	IN_LOGIN = 8;//正在登录中
+	NAME_SENSITIVE = 9;//玩家名有敏感字
+	NO_ROLE_DATA = 10;//没有该玩家信息
+	NAME_REPEATED = 11;//名字重复
+	NAME_TOO_LONG = 12;//名字过长
+	NAME_SPECIAL_CHAR = 13;//名字特殊字符
+	
+	//银行
+	NOT_SUFFICIENT_FUNDS= 14;//余额不足
+	
+	ACCOUNT_ERROR= 15;//账号出错
+	
+	CLOSE_ERROR= 16;//服务已关闭
+	
+	NO_BASE= 17;//没有数据
+	
+	PASSWORD_MISTAKE= 18;//密码错误
+	
+	INFORMATION_IS_NOT= 19;//信息不存在
+	
+	INCORRECT_INPUT_QUANTYTY= 20;//输入数量不正确
+	
+	MATH_ERROR= 21;//输入尾数不正确，为0或5
+	
+	EXCESS_QUANTITY= 22;//您的交易数量已超额
+	
+	REVOKE_FAIL= 23;//撤销失败
+	
+	BUTTON_FAILURE= 24;//按钮失效
+	
+	NOBUY_MYSELF_MESSAGE= 25;//自己的订单不能购买
+	
+} // 25

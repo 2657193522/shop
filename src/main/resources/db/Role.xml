@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.randioo.market_server.dao.RoleDAO">
+	<!-- insert -->
+	<insert id="insert">
+		insert into role(
+		roleId,
+		account,
+		role_rmbA,
+		passWord,
+		vip_level
+		) values(
+		#{roleId},
+		#{account},
+		#{role_rmbA},
+		#{passWord}.
+		#{vip_level}
+		)
+	</insert>
+
+	<!-- select -->
+	<select id="get" resultType="Role">
+		select
+		*
+		from
+		role
+		<where>
+			<if test="roleId != 0 ">
+				roleId=#{roleId}
+			</if>
+			<if test="account != null">
+				AND account=#{account}
+			</if>
+		</where>
+	</select>
+
+	<!-- select -->
+	<select id="getRole" resultType="Role">
+		select
+		*
+		from
+		role
+		<where>
+
+			<if test="account != null">
+				account=#{account}
+			</if>
+		</where>
+	</select>
+	<!-- update -->
+	<update id="update">
+		update
+		role
+		set
+		roleId=#{roleId},
+		account=#{account},
+		role_rmbA=#{role_rmbA},
+		passWord=#{passWord},
+		vip_level=#{vip_level}
+		where
+		account=#{account}
+	</update>
+
+	<!-- select -->
+	<select id="getAllAccounts" resultType="string">
+		select
+		account
+		from
+		role
+	</select>
+
+	<!-- select -->
+	<select id="getAllNames" resultType="string">
+		select
+		account
+		from
+		role
+	</select>
+	<!-- select -->
+	<select id="getRoles" resultType="string">
+		select
+		roleId
+		from
+		role
+		where
+		account=#{account}
+	</select>
+
+
+	<select id="selectId" resultType="int">
+		select
+		roleId
+		from
+		role
+		where
+		account=#{account}
+	</select>
+	<!-- select -->
+	<select id="getMaxRoleId" resultType="int">
+		select
+		MAX(roleId)
+		from
+		role
+	</select>
+</mapper>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.randioo.market_server.dao.DaykDAO">
+	<insert id="insert" parameterType="DaykBO">
+		insert into
+		dayk(
+		day_id,
+		day_max_price,
+		day_min_price,
+		day_sum_price,
+		day_sum_count,
+		day_percentage,
+		day_start_price,
+		day_end_price,
+		day_time,
+		day_type)
+		values(
+		#{day_id},
+		#{day_max_price},
+		#{day_min_price},
+		#{day_sum_price},
+		#{day_sum_count},
+		#{day_percentage},
+		#{day_start_price},
+		#{day_end_price},
+		#{day_time},
+		#{day_type}
+		)
+	</insert>
+	<!-- update -->
+	<update id="update">
+		update
+		dayk
+		set
+		day_id=#{day_id},
+		day_max_price=#{day_max_price},
+		day_min_price=#{day_min_price},
+		day_sum_price=#{day_sum_price},
+		day_sum_count=#{day_sum_count},
+		day_percentage=#{day_percentage},
+		day_start_price=#{day_start_price},
+		day_end_price#{day_end_price},
+		day_time=#{day_time}
+		where
+		day_id=#{day_id}
+	</update>
+	<!-- select -->
+
+	<!-- select -->
+	<select id="selectId" resultType="int">
+		select
+		max(day_id)
+		from
+		dayk
+
+	</select>
+	<!-- select -->
+	<select id="selectList" resultType="DaykBO">
+		select
+		day_id as day_id,
+		day_max_price as day_max_price,
+		day_min_price as day_min_price,
+		day_sum_price as
+		day_sum_price,
+		day_sum_count as day_sum_count,
+		day_percentage as day_percentage,
+		day_start_price as
+		day_start_price,
+		day_end_price as day_end_price,
+		day_time as day_time,
+		day_type as
+		day_type
+		from
+		dayk
+		where
+		day_id=#{day_id}
+	</select>
+
+
+	<select id="getLastDayk" resultType="DaykBO">
+		select
+		day_id as day_id,
+		day_max_price as day_max_price,
+		day_min_price as day_min_price,
+		day_sum_price as
+		day_sum_price,
+		day_sum_count as day_sum_count,
+		day_percentage as day_percentage,
+		day_start_price as
+		day_start_price,
+		day_end_price as day_end_price,
+		day_time as day_time,
+		day_type as
+		day_type
+		from
+		dayk
+		where
+		day_type=#{day_type}
+		order by day_id desc limit 1
+	</select>
+
+	<select id="getLastTwoDayk" resultType="DaykBO">
+		select
+		day_id as day_id,
+		day_max_price as day_max_price,
+		day_min_price as day_min_price,
+		day_sum_price as
+		day_sum_price,
+		day_sum_count as day_sum_count,
+		day_percentage as day_percentage,
+		day_start_price as
+		day_start_price,
+		day_end_price as day_end_price,
+		day_time as day_time,
+		day_type as
+		day_type
+		from
+		dayk
+		where
+		day_type=#{day_type}
+		order by day_id desc limit
+		1,1
+	</select>
+
+	<select id="selectAll" resultType="DaykBO">
+		select
+		day_id as day_id,
+		day_max_price as day_max_price,
+		day_min_price as day_min_price,
+		day_sum_price as
+		day_sum_price,
+		day_sum_count as day_sum_count,
+		day_percentage as day_percentage,
+		day_start_price as
+		day_start_price,
+		day_end_price as day_end_price,
+		day_time as day_time,
+		day_type as
+		day_type
+		from
+		dayk
+		where
+		day_type=#{day_type}
+
+	</select>
+
+	<select id="getTypeDayk" resultType="DaykBO">
+		select
+		day_id as day_id,
+		day_max_price as day_max_price,
+		day_min_price as day_min_price,
+		day_sum_price as
+		day_sum_price,
+		day_sum_count as day_sum_count,
+		day_percentage as day_percentage,
+		day_start_price as
+		day_start_price,
+		day_end_price as day_end_price,
+		day_time as day_time,
+		day_type as
+		day_type
+		from
+		dayk
+		order by day_id desc limit 48
+	</select>
+
+
+
+</mapper>

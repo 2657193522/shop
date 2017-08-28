@@ -1,0 +1,64 @@
+package com.randioo.market_server.protocol;
+import "Goods.proto";
+import "Login.proto";
+import "Gm.proto";
+import "Seller.proto";
+import "Buyer.proto";
+import "Deal.proto";
+import "Role.proto";
+import "Entity.proto";
+import "UserInfo.proto";
+import "GoodsTy.proto";
+import "K.proto";
+import "SystemInfo.proto";
+import "Heart.proto";
+message SC{
+	optional HeartResponse HeartResponse= 1;
+	optional SCHeart SCHeart= 2;//心跳协议
+	optional LoginCheckAccountResponse LoginCheckAccountResponse= 3;
+	optional GmCmdResponse GmCmdResponse= 4;
+	optional LoginCreateRoleResponse LoginCreateRoleResponse= 5;
+	optional LoginGetRoleDataResponse LoginGetRoleDataResponse= 6;
+	optional RoleRenameResponse RoleRenameResponse= 7;
+	optional GetRoleDataResponse GetRoleDataResponse= 8;
+	
+	optional SystemInfoResponse SystemInfoResponse= 9;//初始查看系统状态 1
+	optional GoodsTyResponse GoodsTyResponse= 10;//界面显示信息 2
+	optional UserInfoResponse UserInfoResponse= 11;//登录请求用户信息 3
+	optional SellerMyResponse SellerMyResponse= 12;//查看个人委托信息 4
+	
+	optional SellerResponse SellerResponse= 13;//上架卖的信息
+	optional RevokeSellerResponse RevokeSellerResponse= 14;//撤销信息
+	
+	optional BuyerResponse BuyerResponse= 15;//生成买的信息
+	
+	optional DealResponse DealResponse= 16;//查看交易详情
+	optional GoodsResponse GoodsResponse= 17;//请求商品详情
+	
+	optional DayClickResponse DayClickResponse= 18;//点击日K
+	optional MinkClickResponse MinkClickResponse= 19;//点击5分K数据
+	
+	optional KResponse KResponse= 20;//初始进来K线图数据请求
+	
+	optional SCRefushMink SCRefushMink= 21;//刷新5分K的数据每秒刷新++++
+	
+	optional SCSellerMyMessage SCSellerMyMessage= 22;//查看委托信息 发生变化主推
+	optional SCGoodsType SCGoodsType= 23;//主推查看所有界面显示信息
+	optional SCNotice SCNotice= 24;//产生交易信息主推(感叹号)
+	optional SCNumberNotice SCNumberNotice= 25;//交易信息产生主推用户信息
+	
+	optional SCServerState SCServerState= 26;//初始主推系统状态
+	optional SCFight SCFight = 27;//系统状态变化
+	
+	optional SCLoginOtherSide SCLoginOtherSide= 28;//异地登录
+	
+	optional OneMinkResponse OneMinkResponse= 29;//一分钟K线数据
+	optional FifMinkResponse FifMinkResponse= 30;//15分钟K线数据
+	optional ThirtyMinkResponse ThirtyMinkResponse= 31;//30分钟K线数据
+	optional SixMinkResponse SixMinkResponse= 32;//一小时K线数据
+	
+	
+	
+	
+	
+} // 32

@@ -1,0 +1,13 @@
+package com.randioo.market_server.protocol;
+import "Entity.proto";
+
+message DealRequest{//查看交易详情
+	optional string type=1;
+	optional int32 startNum=2;
+	optional int32 count=3;
+}
+
+message DealResponse{//
+	optional int32 errorCode=1 [default = 1];
+	repeated TradingData TradingData=2;//当天成交信息	
+}

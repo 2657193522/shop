@@ -1,0 +1,78 @@
+package com.randioo.market_server.protocol;
+
+message GoodsTypeData{//根据类型请求所有出售信息
+	optional string type=1;//出售类型
+	optional string price=2;//出售价格
+	optional int32 count=3;//出售数量
+	optional string sellAccount=4;//卖家
+	optional int32 sellId=5;//出售单号
+	
+}
+message RoleData{
+	optional int32 roleId = 1;//用户Id
+	optional string name =2;//用户帐号
+	optional int32 rmbA=3;//用户金额
+	optional int32 count=4;//用户数量
+	optional int32  level=5;//0是普通用户，1是会员
+}
+message GoodsData{
+	optional int32 goodsId = 1;//商品Id
+	optional string sellAccount = 2;//归属用户
+	optional int32 goodsNum = 3;//商品数量 1
+	optional string type = 4;//商品类型
+	optional string time=5;
+	optional int32 price=6;
+	optional int32 sellId=7;
+}
+message SellerData{
+	optional int32 sellId = 1;//卖的单号 
+	optional string sellAccount = 2;//
+	optional int32 sellCount=3;//卖单数量          
+	optional int32 price=4;//卖的单价             
+	optional string type = 5;//卖的类型           
+	optional int32 sum=6;//卖的总价
+	optional string sellTime=7;//卖单生成时间        
+	optional int32 overCount=8;//卖出数量          
+	optional int32 active=9;//出售状态  (1是正在出售，0是售卖成功)    
+}
+message SellerInfoData{
+	optional string type=1;//商品类型
+	optional string price=2;//商品价格
+	optional int32 count=3;//商品数量
+	optional string PWD=4;//密码 
+}
+
+message BuyerData{
+	optional int32 buyCount=1;//买的数量
+	optional string buyPrice=2;//商品价格
+	optional string type=3;//商品类型
+	optional int32 sellId=4;
+	optional string sellAccount=5;
+	optional string PWD=6;//密码
+}
+
+message TradingData{
+	optional int32 tradId=1;//成交单号		
+	optional int32 buyId=2;//买的订单号
+	optional string buyAccount=3;//买的用户Id	
+	optional string sellAccount=4;//卖的用户Id
+	optional int32 tradPrice=5;//成交价格	
+	optional int32 tradCount=6;//成交数量		
+	optional int32 tradSum=7;//成交总价		
+	optional string tradTime=8;//成交时间		
+	optional int32 money=9;//手续费			
+	repeated GoodsData GoodsData=10;
+}
+
+message KData{
+	optional int32 maxPrice=1;
+	optional int32 minPrice=2;
+	optional int32 sumPrice=3;
+	optional int32 sumCount=4;
+	optional int32 percentage=5;
+	optional int32 startPrice=6;
+	optional int32 endPrice=7;
+	optional string dayTime=8;
+	optional bool panduan=9;
+	optional int32 number=10;//代表几分线
+}

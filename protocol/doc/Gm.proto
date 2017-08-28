@@ -1,0 +1,31 @@
+package com.randioo.market_server.protocol;
+
+message GmCmdRequest{
+	optional string cmd = 1;
+}
+message GmCmdResponse{
+}
+message SCFight{//系统状态 变化通知
+	optional string notice=1;
+	optional string time=2;
+}
+message SCNotice{//交易之后的信息主推，(感叹号)
+	optional int32 notice=1;
+}
+message SCNumberNotice{//主推金额变化数量变化
+	optional string account=1;//用户
+	optional int32 count=2;//数量
+	optional string rmbA=3;//金额
+
+}
+message SCServerState{//开市闭市通知
+	optional string state=1;//状态
+	optional string openTime=2;//开市时间
+	optional string	closeTime=3;//关市时间
+	
+}
+message SCLoginOtherSide{//异地登录
+
+}
+
+

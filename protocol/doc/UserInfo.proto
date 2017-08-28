@@ -1,0 +1,12 @@
+package com.randioo.market_server.protocol;
+import "Entity.proto";
+
+message UserInfoRequest{//用户数据请求
+	optional string account=1;
+	optional string type=2;
+}
+
+message UserInfoResponse{
+	optional int32 errorCode=1 [default = 1];
+		optional RoleData RoleData=2;//用户数据 
+}

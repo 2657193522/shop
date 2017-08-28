@@ -1,0 +1,11 @@
+package com.randioo.market_server.protocol;
+import "Entity.proto";
+
+message BuyerRequest{//买的协议
+	optional BuyerData buyerData=1;//买的详细信息
+}
+
+message BuyerResponse{
+	optional int32 errorCode=1 [default = 1];
+	repeated TradingData tradingData=2;	//成交单信息
+}

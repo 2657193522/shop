@@ -1,0 +1,13 @@
+package com.randioo.market_server.protocol;
+import "Entity.proto";
+
+message GoodsRequest{//查看商品详情
+	optional string type = 1;
+	optional string price=2;
+	optional string sellAccount=3;
+	optional int32 sellId=4;
+}
+message GoodsResponse{//查看商品详情返回
+	optional int32 errorCode=1 [default = 1];
+	repeated GoodsData GoodsData=2;//商品详情
+}

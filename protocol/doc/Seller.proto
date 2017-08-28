@@ -1,0 +1,34 @@
+package com.randioo.market_server.protocol;
+import "Entity.proto";
+
+message SellerRequest{//上架出售的信息
+	optional SellerInfoData SellerInfoData=1;//卖的信息  价格 类型
+}
+
+message SellerResponse{//上架之后返回
+	optional int32 errorCode=1 [default = 1];
+	optional SellerData sellerData= 2 ;//该用户的卖的信息
+	
+}
+message RevokeSellerRequest{//撤銷我的委託
+	optional string type = 1;//类型
+	optional string price=2;//价格
+	optional string sellAccount=3;//卖家帐号
+	optional int32 sellId=4;//卖的Id
+	optional int32 count=5;//出售数量
+}
+message RevokeSellerResponse{//撤銷賣的信息
+	optional int32 errorCode=1 [default = 1];
+	optional string freeback=2;//反馈
+}
+
+message SellerMyRequest{//查看个人委托信息
+	optional string account=1;//自己帐号
+}
+message SellerMyResponse{//个人委托信息返回
+	optional int32 errorCode=1 [default = 1];
+}
+
+message SCSellerMyMessage{//主推个人委托信息
+	repeated GoodsTypeData GoodsTypeData=1;//出售信息
+}

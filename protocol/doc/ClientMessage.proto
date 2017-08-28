@@ -1,0 +1,45 @@
+package com.randioo.market_server.protocol;
+import "Goods.proto";
+import "Login.proto";
+import "Gm.proto";
+import "Seller.proto";
+import "Buyer.proto";
+import "Deal.proto";
+import "UserInfo.proto";
+import "GoodsTy.proto";
+import "K.proto";
+import "SystemInfo.proto";
+import "Heart.proto";
+message CS{
+	optional HeartRequest HeartRequest= 1;//心跳协议
+	optional LoginCheckAccountRequest LoginCheckAccountRequest= 2;//登录协议
+	
+	optional GmCmdRequest GmCmdRequest= 3;
+	
+	optional LoginCreateRoleRequest LoginCreateRoleRequest= 4;
+	optional LoginGetRoleDataRequest LoginGetRoleDataRequest= 5;
+	
+
+	optional SystemInfoRequest SystemInfoRequest= 6;//查看系统状况  1
+	optional GoodsTyRequest GoodsTyRequest= 7;//界面数据请求 2
+	optional UserInfoRequest UserInfoRequest= 8;//登录之后  查看用户数据  4 
+	optional SellerMyRequest SellerMyRequest= 9;//查看个人委托信息请求  5
+	
+	optional SellerRequest SellerRequest= 10;//上架卖的信息
+	optional BuyerRequest BuyerRequest= 11;//添加买的信息
+	optional RevokeSellerRequest RevokeSellerRequest= 12;//撤销出售信息
+	optional GoodsRequest GoodsRequest= 13;//查看商品数据
+	optional DealRequest DealRequest= 14;//查看当天成交信息
+	
+	optional KRequest KRequest= 15;//请求K线数据
+	optional DayClickRequest DayClickRequest= 16;//点击请求日K数据
+	optional MinkClickRequest MinkClickRequest= 17;//点击请求分K数据
+	
+	optional OneMinkRequest OneMinkRequest= 18;//点击请求1分钟分K数据
+	optional FifMinkRequest FifMinkRequest= 19;//点击请求15分钟K数据
+	optional ThirtyMinkRequest ThirtyMinkRequest= 20;//点击请求30分钟K数据
+	optional SixMinkRequest SixMinkRequest= 21;//点击请求1小时K数据
+	optional CSHeart CSHeart= 22;//心跳协议
+} // 22
+
+
