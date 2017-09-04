@@ -23,9 +23,12 @@ public class Constant {
 	public static final String FREE_BACK = "Revoke success";
 	/**撤销失败*/
 	public static final String FREE_FAIL = "Revoke fail";
-	/** 是为1 */
+	/** 是为1 正在出售中*/
 	public static final int YES = 1;
-	/** 否为0 */
+	/** 否为0  全部已成交 */
 	public static final int NO = 0;
-
+	/** 用户撤单*/
+	public static final int SOME_SELL=2;//用户撤单
+	/**系统撤单*/
+	public static final int SYSTEM_RRVOKE=3;//系统撤单
 }

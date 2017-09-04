@@ -23,6 +23,5 @@ public interface RoleDAO extends BaseDao<Role> {
 	
 	Role getRole(@Param("account") String account);
 	
-	Role getRoles(@Param("account") String account);
 
 }

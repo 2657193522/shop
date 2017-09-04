@@ -52,7 +52,8 @@
 				<ref bean="thirtyMinkService" />
 				<ref bean="sixtyMinkService" />
 				<ref bean="ontMinkService" />
-				
+				<ref bean="activeInfoService"/>
+
 			</list>
 		</property>
 	</bean>

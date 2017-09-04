@@ -259,6 +259,13 @@ public final class ServerMessage {
     public boolean hasSixMinkResponse() { return hasSixMinkResponse; }
     public com.randioo.market_server.protocol.K.SixMinkResponse getSixMinkResponse() { return sixMinkResponse_; }
     
+    // optional .com.randioo.market_server.protocol.ActiveInfoResponse ActiveInfoResponse = 33;
+    public static final int ACTIVEINFORESPONSE_FIELD_NUMBER = 33;
+    private boolean hasActiveInfoResponse;
+    private com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse activeInfoResponse_;
+    public boolean hasActiveInfoResponse() { return hasActiveInfoResponse; }
+    public com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse getActiveInfoResponse() { return activeInfoResponse_; }
+    
     private void initFields() {
       heartResponse_ = com.randioo.market_server.protocol.Heart.HeartResponse.getDefaultInstance();
       sCHeart_ = com.randioo.market_server.protocol.Heart.SCHeart.getDefaultInstance();
@@ -292,6 +299,7 @@ public final class ServerMessage {
       fifMinkResponse_ = com.randioo.market_server.protocol.K.FifMinkResponse.getDefaultInstance();
       thirtyMinkResponse_ = com.randioo.market_server.protocol.K.ThirtyMinkResponse.getDefaultInstance();
       sixMinkResponse_ = com.randioo.market_server.protocol.K.SixMinkResponse.getDefaultInstance();
+      activeInfoResponse_ = com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse.getDefaultInstance();
     }
     public final boolean isInitialized() {
       return true;
@@ -395,6 +403,9 @@ public final class ServerMessage {
       }
       if (hasSixMinkResponse()) {
         output.writeMessage(32, getSixMinkResponse());
+      }
+      if (hasActiveInfoResponse()) {
+        output.writeMessage(33, getActiveInfoResponse());
       }
       getUnknownFields().writeTo(output);
     }
@@ -532,6 +543,10 @@ public final class ServerMessage {
       if (hasSixMinkResponse()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(32, getSixMinkResponse());
+      }
+      if (hasActiveInfoResponse()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(33, getActiveInfoResponse());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -786,6 +801,9 @@ public final class ServerMessage {
         }
         if (other.hasSixMinkResponse()) {
           mergeSixMinkResponse(other.getSixMinkResponse());
+        }
+        if (other.hasActiveInfoResponse()) {
+          mergeActiveInfoResponse(other.getActiveInfoResponse());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1098,6 +1116,15 @@ public final class ServerMessage {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setSixMinkResponse(subBuilder.buildPartial());
+              break;
+            }
+            case 266: {
+              com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse.Builder subBuilder = com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse.newBuilder();
+              if (hasActiveInfoResponse()) {
+                subBuilder.mergeFrom(getActiveInfoResponse());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setActiveInfoResponse(subBuilder.buildPartial());
               break;
             }
           }
@@ -2289,6 +2316,43 @@ public final class ServerMessage {
         return this;
       }
       
+      // optional .com.randioo.market_server.protocol.ActiveInfoResponse ActiveInfoResponse = 33;
+      public boolean hasActiveInfoResponse() {
+        return result.hasActiveInfoResponse();
+      }
+      public com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse getActiveInfoResponse() {
+        return result.getActiveInfoResponse();
+      }
+      public Builder setActiveInfoResponse(com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasActiveInfoResponse = true;
+        result.activeInfoResponse_ = value;
+        return this;
+      }
+      public Builder setActiveInfoResponse(com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse.Builder builderForValue) {
+        result.hasActiveInfoResponse = true;
+        result.activeInfoResponse_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeActiveInfoResponse(com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse value) {
+        if (result.hasActiveInfoResponse() &&
+            result.activeInfoResponse_ != com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse.getDefaultInstance()) {
+          result.activeInfoResponse_ =
+            com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse.newBuilder(result.activeInfoResponse_).mergeFrom(value).buildPartial();
+        } else {
+          result.activeInfoResponse_ = value;
+        }
+        result.hasActiveInfoResponse = true;
+        return this;
+      }
+      public Builder clearActiveInfoResponse() {
+        result.hasActiveInfoResponse = false;
+        result.activeInfoResponse_ = com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse.getDefaultInstance();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.randioo.market_server.protocol.SC)
     }
     
@@ -2320,7 +2384,7 @@ public final class ServerMessage {
       "oto\032\010Gm.proto\032\014Seller.proto\032\013Buyer.proto" +
       "\032\nDeal.proto\032\nRole.proto\032\014Entity.proto\032\016" +
       "UserInfo.proto\032\rGoodsTy.proto\032\007K.proto\032\020" +
-      "SystemInfo.proto\032\013Heart.proto\"\310\023\n\002SC\022H\n\r" +
+      "SystemInfo.proto\032\013Heart.proto\"\234\024\n\002SC\022H\n\r" +
       "HeartResponse\030\001 \001(\01321.com.randioo.market" +
       "_server.protocol.HeartResponse\022<\n\007SCHear" +
       "t\030\002 \001(\0132+.com.randioo.market_server.prot" +
@@ -2383,7 +2447,9 @@ public final class ServerMessage {
       "(\01326.com.randioo.market_server.protocol." +
       "ThirtyMinkResponse\022L\n\017SixMinkResponse\030  " +
       "\001(\01323.com.randioo.market_server.protocol" +
-      ".SixMinkResponse"
+      ".SixMinkResponse\022R\n\022ActiveInfoResponse\030!" +
+      " \001(\01326.com.randioo.market_server.protoco",
+      "l.ActiveInfoResponse"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2395,7 +2461,7 @@ public final class ServerMessage {
           internal_static_com_randioo_market_server_protocol_SC_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_market_server_protocol_SC_descriptor,
-              new java.lang.String[] { "HeartResponse", "SCHeart", "LoginCheckAccountResponse", "GmCmdResponse", "LoginCreateRoleResponse", "LoginGetRoleDataResponse", "RoleRenameResponse", "GetRoleDataResponse", "SystemInfoResponse", "GoodsTyResponse", "UserInfoResponse", "SellerMyResponse", "SellerResponse", "RevokeSellerResponse", "BuyerResponse", "DealResponse", "GoodsResponse", "DayClickResponse", "MinkClickResponse", "KResponse", "SCRefushMink", "SCSellerMyMessage", "SCGoodsType", "SCNotice", "SCNumberNotice", "SCServerState", "SCFight", "SCLoginOtherSide", "OneMinkResponse", "FifMinkResponse", "ThirtyMinkResponse", "SixMinkResponse", },
+              new java.lang.String[] { "HeartResponse", "SCHeart", "LoginCheckAccountResponse", "GmCmdResponse", "LoginCreateRoleResponse", "LoginGetRoleDataResponse", "RoleRenameResponse", "GetRoleDataResponse", "SystemInfoResponse", "GoodsTyResponse", "UserInfoResponse", "SellerMyResponse", "SellerResponse", "RevokeSellerResponse", "BuyerResponse", "DealResponse", "GoodsResponse", "DayClickResponse", "MinkClickResponse", "KResponse", "SCRefushMink", "SCSellerMyMessage", "SCGoodsType", "SCNotice", "SCNumberNotice", "SCServerState", "SCFight", "SCLoginOtherSide", "OneMinkResponse", "FifMinkResponse", "ThirtyMinkResponse", "SixMinkResponse", "ActiveInfoResponse", },
               com.randioo.market_server.protocol.ServerMessage.SC.class,
               com.randioo.market_server.protocol.ServerMessage.SC.Builder.class);
           return null;

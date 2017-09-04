@@ -32,7 +32,7 @@ public class market_serverApp {
 		GlobleConfig.init(args);
 
 		ConfigLoader.loadConfig("com.randioo.market_server.entity.file", "./config.zip");
-		SpringContext.initSpringCtx("ApplicationContext.xml");
+		SpringContext.initSpringCtx("classpath:ApplicationContext.xml");
 
 		GameServerInit gameServerInit = (GameServerInit) SpringContext.getBean("gameServerInit");
 
@@ -50,9 +50,6 @@ public class market_serverApp {
 		gameServerInit.start();
 		GlobleConfig.set(GlobleEnum.LOGIN, true);
 		HttpInit.init();
-		
-		
-		
 
 	}
 }

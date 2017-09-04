@@ -685,6 +685,658 @@ public final class UserInfo {
     // @@protoc_insertion_point(class_scope:com.randioo.market_server.protocol.UserInfoResponse)
   }
   
+  public static final class ActiveInfoRequest extends
+      com.google.protobuf.GeneratedMessage {
+    // Use ActiveInfoRequest.newBuilder() to construct.
+    private ActiveInfoRequest() {
+      initFields();
+    }
+    private ActiveInfoRequest(boolean noInit) {}
+    
+    private static final ActiveInfoRequest defaultInstance;
+    public static ActiveInfoRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public ActiveInfoRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.randioo.market_server.protocol.UserInfo.internal_static_com_randioo_market_server_protocol_ActiveInfoRequest_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.randioo.market_server.protocol.UserInfo.internal_static_com_randioo_market_server_protocol_ActiveInfoRequest_fieldAccessorTable;
+    }
+    
+    // optional string account = 1;
+    public static final int ACCOUNT_FIELD_NUMBER = 1;
+    private boolean hasAccount;
+    private java.lang.String account_ = "";
+    public boolean hasAccount() { return hasAccount; }
+    public java.lang.String getAccount() { return account_; }
+    
+    // optional string pwd = 2;
+    public static final int PWD_FIELD_NUMBER = 2;
+    private boolean hasPwd;
+    private java.lang.String pwd_ = "";
+    public boolean hasPwd() { return hasPwd; }
+    public java.lang.String getPwd() { return pwd_; }
+    
+    private void initFields() {
+    }
+    public final boolean isInitialized() {
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (hasAccount()) {
+        output.writeString(1, getAccount());
+      }
+      if (hasPwd()) {
+        output.writeString(2, getPwd());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasAccount()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(1, getAccount());
+      }
+      if (hasPwd()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeStringSize(2, getPwd());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest result;
+      
+      // Construct using com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest();
+        return builder;
+      }
+      
+      protected com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest.getDescriptor();
+      }
+      
+      public com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest getDefaultInstanceForType() {
+        return com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest) {
+          return mergeFrom((com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest other) {
+        if (other == com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest.getDefaultInstance()) return this;
+        if (other.hasAccount()) {
+          setAccount(other.getAccount());
+        }
+        if (other.hasPwd()) {
+          setPwd(other.getPwd());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              setAccount(input.readString());
+              break;
+            }
+            case 18: {
+              setPwd(input.readString());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // optional string account = 1;
+      public boolean hasAccount() {
+        return result.hasAccount();
+      }
+      public java.lang.String getAccount() {
+        return result.getAccount();
+      }
+      public Builder setAccount(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasAccount = true;
+        result.account_ = value;
+        return this;
+      }
+      public Builder clearAccount() {
+        result.hasAccount = false;
+        result.account_ = getDefaultInstance().getAccount();
+        return this;
+      }
+      
+      // optional string pwd = 2;
+      public boolean hasPwd() {
+        return result.hasPwd();
+      }
+      public java.lang.String getPwd() {
+        return result.getPwd();
+      }
+      public Builder setPwd(java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasPwd = true;
+        result.pwd_ = value;
+        return this;
+      }
+      public Builder clearPwd() {
+        result.hasPwd = false;
+        result.pwd_ = getDefaultInstance().getPwd();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.randioo.market_server.protocol.ActiveInfoRequest)
+    }
+    
+    static {
+      defaultInstance = new ActiveInfoRequest(true);
+      com.randioo.market_server.protocol.UserInfo.internalForceInit();
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.randioo.market_server.protocol.ActiveInfoRequest)
+  }
+  
+  public static final class ActiveInfoResponse extends
+      com.google.protobuf.GeneratedMessage {
+    // Use ActiveInfoResponse.newBuilder() to construct.
+    private ActiveInfoResponse() {
+      initFields();
+    }
+    private ActiveInfoResponse(boolean noInit) {}
+    
+    private static final ActiveInfoResponse defaultInstance;
+    public static ActiveInfoResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public ActiveInfoResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.randioo.market_server.protocol.UserInfo.internal_static_com_randioo_market_server_protocol_ActiveInfoResponse_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.randioo.market_server.protocol.UserInfo.internal_static_com_randioo_market_server_protocol_ActiveInfoResponse_fieldAccessorTable;
+    }
+    
+    // optional int32 errorCode = 1 [default = 1];
+    public static final int ERRORCODE_FIELD_NUMBER = 1;
+    private boolean hasErrorCode;
+    private int errorCode_ = 1;
+    public boolean hasErrorCode() { return hasErrorCode; }
+    public int getErrorCode() { return errorCode_; }
+    
+    // optional int32 active = 2;
+    public static final int ACTIVE_FIELD_NUMBER = 2;
+    private boolean hasActive;
+    private int active_ = 0;
+    public boolean hasActive() { return hasActive; }
+    public int getActive() { return active_; }
+    
+    private void initFields() {
+    }
+    public final boolean isInitialized() {
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (hasErrorCode()) {
+        output.writeInt32(1, getErrorCode());
+      }
+      if (hasActive()) {
+        output.writeInt32(2, getActive());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (hasErrorCode()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, getErrorCode());
+      }
+      if (hasActive()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, getActive());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+      private com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse result;
+      
+      // Construct using com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse.newBuilder()
+      private Builder() {}
+      
+      private static Builder create() {
+        Builder builder = new Builder();
+        builder.result = new com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse();
+        return builder;
+      }
+      
+      protected com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse internalGetResult() {
+        return result;
+      }
+      
+      public Builder clear() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "Cannot call clear() after build().");
+        }
+        result = new com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(result);
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse.getDescriptor();
+      }
+      
+      public com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse getDefaultInstanceForType() {
+        return com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse.getDefaultInstance();
+      }
+      
+      public boolean isInitialized() {
+        return result.isInitialized();
+      }
+      public com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse build() {
+        if (result != null && !isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return buildPartial();
+      }
+      
+      private com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        if (!isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return buildPartial();
+      }
+      
+      public com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse buildPartial() {
+        if (result == null) {
+          throw new IllegalStateException(
+            "build() has already been called on this Builder.");
+        }
+        com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse returnMe = result;
+        result = null;
+        return returnMe;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse) {
+          return mergeFrom((com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse other) {
+        if (other == com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse.getDefaultInstance()) return this;
+        if (other.hasErrorCode()) {
+          setErrorCode(other.getErrorCode());
+        }
+        if (other.hasActive()) {
+          setActive(other.getActive());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              setErrorCode(input.readInt32());
+              break;
+            }
+            case 16: {
+              setActive(input.readInt32());
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // optional int32 errorCode = 1 [default = 1];
+      public boolean hasErrorCode() {
+        return result.hasErrorCode();
+      }
+      public int getErrorCode() {
+        return result.getErrorCode();
+      }
+      public Builder setErrorCode(int value) {
+        result.hasErrorCode = true;
+        result.errorCode_ = value;
+        return this;
+      }
+      public Builder clearErrorCode() {
+        result.hasErrorCode = false;
+        result.errorCode_ = 1;
+        return this;
+      }
+      
+      // optional int32 active = 2;
+      public boolean hasActive() {
+        return result.hasActive();
+      }
+      public int getActive() {
+        return result.getActive();
+      }
+      public Builder setActive(int value) {
+        result.hasActive = true;
+        result.active_ = value;
+        return this;
+      }
+      public Builder clearActive() {
+        result.hasActive = false;
+        result.active_ = 0;
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.randioo.market_server.protocol.ActiveInfoResponse)
+    }
+    
+    static {
+      defaultInstance = new ActiveInfoResponse(true);
+      com.randioo.market_server.protocol.UserInfo.internalForceInit();
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.randioo.market_server.protocol.ActiveInfoResponse)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_randioo_market_server_protocol_UserInfoRequest_descriptor;
   private static
@@ -695,6 +1347,16 @@ public final class UserInfo {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_randioo_market_server_protocol_UserInfoResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_randioo_market_server_protocol_ActiveInfoRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_randioo_market_server_protocol_ActiveInfoRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_randioo_market_server_protocol_ActiveInfoResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_randioo_market_server_protocol_ActiveInfoResponse_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -709,7 +1371,10 @@ public final class UserInfo {
       "quest\022\017\n\007account\030\001 \001(\t\022\014\n\004type\030\002 \001(\t\"h\n\020" +
       "UserInfoResponse\022\024\n\terrorCode\030\001 \001(\005:\0011\022>" +
       "\n\010RoleData\030\002 \001(\0132,.com.randioo.market_se" +
-      "rver.protocol.RoleData"
+      "rver.protocol.RoleData\"1\n\021ActiveInfoRequ" +
+      "est\022\017\n\007account\030\001 \001(\t\022\013\n\003pwd\030\002 \001(\t\":\n\022Act" +
+      "iveInfoResponse\022\024\n\terrorCode\030\001 \001(\005:\0011\022\016\n" +
+      "\006active\030\002 \001(\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -732,6 +1397,22 @@ public final class UserInfo {
               new java.lang.String[] { "ErrorCode", "RoleData", },
               com.randioo.market_server.protocol.UserInfo.UserInfoResponse.class,
               com.randioo.market_server.protocol.UserInfo.UserInfoResponse.Builder.class);
+          internal_static_com_randioo_market_server_protocol_ActiveInfoRequest_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_com_randioo_market_server_protocol_ActiveInfoRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_randioo_market_server_protocol_ActiveInfoRequest_descriptor,
+              new java.lang.String[] { "Account", "Pwd", },
+              com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest.class,
+              com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest.Builder.class);
+          internal_static_com_randioo_market_server_protocol_ActiveInfoResponse_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_com_randioo_market_server_protocol_ActiveInfoResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_randioo_market_server_protocol_ActiveInfoResponse_descriptor,
+              new java.lang.String[] { "ErrorCode", "Active", },
+              com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse.class,
+              com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse.Builder.class);
           return null;
         }
       };

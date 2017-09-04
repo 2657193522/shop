@@ -47,4 +47,8 @@
 		<item type="int" name="交易数量" code="count" />
 		<item type="string" name="用户" code="user" />
 	</node>
+	<node type="java" xlsx="端口.xlsx" page="port" out="port.tbl"
+		code="PortConfig">
+		<item type="int" name="端口号" code="port" />
+	</node>
 </data>

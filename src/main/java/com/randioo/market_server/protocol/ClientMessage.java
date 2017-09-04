@@ -189,6 +189,13 @@ public final class ClientMessage {
     public boolean hasCSHeart() { return hasCSHeart; }
     public com.randioo.market_server.protocol.Heart.CSHeart getCSHeart() { return cSHeart_; }
     
+    // optional .com.randioo.market_server.protocol.ActiveInfoRequest ActiveInfoRequest = 23;
+    public static final int ACTIVEINFOREQUEST_FIELD_NUMBER = 23;
+    private boolean hasActiveInfoRequest;
+    private com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest activeInfoRequest_;
+    public boolean hasActiveInfoRequest() { return hasActiveInfoRequest; }
+    public com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest getActiveInfoRequest() { return activeInfoRequest_; }
+    
     private void initFields() {
       heartRequest_ = com.randioo.market_server.protocol.Heart.HeartRequest.getDefaultInstance();
       loginCheckAccountRequest_ = com.randioo.market_server.protocol.Login.LoginCheckAccountRequest.getDefaultInstance();
@@ -212,6 +219,7 @@ public final class ClientMessage {
       thirtyMinkRequest_ = com.randioo.market_server.protocol.K.ThirtyMinkRequest.getDefaultInstance();
       sixMinkRequest_ = com.randioo.market_server.protocol.K.SixMinkRequest.getDefaultInstance();
       cSHeart_ = com.randioo.market_server.protocol.Heart.CSHeart.getDefaultInstance();
+      activeInfoRequest_ = com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest.getDefaultInstance();
     }
     public final boolean isInitialized() {
       return true;
@@ -285,6 +293,9 @@ public final class ClientMessage {
       }
       if (hasCSHeart()) {
         output.writeMessage(22, getCSHeart());
+      }
+      if (hasActiveInfoRequest()) {
+        output.writeMessage(23, getActiveInfoRequest());
       }
       getUnknownFields().writeTo(output);
     }
@@ -382,6 +393,10 @@ public final class ClientMessage {
       if (hasCSHeart()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(22, getCSHeart());
+      }
+      if (hasActiveInfoRequest()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(23, getActiveInfoRequest());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -607,6 +622,9 @@ public final class ClientMessage {
         if (other.hasCSHeart()) {
           mergeCSHeart(other.getCSHeart());
         }
+        if (other.hasActiveInfoRequest()) {
+          mergeActiveInfoRequest(other.getActiveInfoRequest());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -828,6 +846,15 @@ public final class ClientMessage {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setCSHeart(subBuilder.buildPartial());
+              break;
+            }
+            case 186: {
+              com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest.Builder subBuilder = com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest.newBuilder();
+              if (hasActiveInfoRequest()) {
+                subBuilder.mergeFrom(getActiveInfoRequest());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setActiveInfoRequest(subBuilder.buildPartial());
               break;
             }
           }
@@ -1649,6 +1676,43 @@ public final class ClientMessage {
         return this;
       }
       
+      // optional .com.randioo.market_server.protocol.ActiveInfoRequest ActiveInfoRequest = 23;
+      public boolean hasActiveInfoRequest() {
+        return result.hasActiveInfoRequest();
+      }
+      public com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest getActiveInfoRequest() {
+        return result.getActiveInfoRequest();
+      }
+      public Builder setActiveInfoRequest(com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasActiveInfoRequest = true;
+        result.activeInfoRequest_ = value;
+        return this;
+      }
+      public Builder setActiveInfoRequest(com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest.Builder builderForValue) {
+        result.hasActiveInfoRequest = true;
+        result.activeInfoRequest_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeActiveInfoRequest(com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest value) {
+        if (result.hasActiveInfoRequest() &&
+            result.activeInfoRequest_ != com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest.getDefaultInstance()) {
+          result.activeInfoRequest_ =
+            com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest.newBuilder(result.activeInfoRequest_).mergeFrom(value).buildPartial();
+        } else {
+          result.activeInfoRequest_ = value;
+        }
+        result.hasActiveInfoRequest = true;
+        return this;
+      }
+      public Builder clearActiveInfoRequest() {
+        result.hasActiveInfoRequest = false;
+        result.activeInfoRequest_ = com.randioo.market_server.protocol.UserInfo.ActiveInfoRequest.getDefaultInstance();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.randioo.market_server.protocol.CS)
     }
     
@@ -1680,7 +1744,7 @@ public final class ClientMessage {
       "oto\032\010Gm.proto\032\014Seller.proto\032\013Buyer.proto" +
       "\032\nDeal.proto\032\016UserInfo.proto\032\rGoodsTy.pr" +
       "oto\032\007K.proto\032\020SystemInfo.proto\032\013Heart.pr" +
-      "oto\"\260\r\n\002CS\022F\n\014HeartRequest\030\001 \001(\01320.com.r" +
+      "oto\"\202\016\n\002CS\022F\n\014HeartRequest\030\001 \001(\01320.com.r" +
       "andioo.market_server.protocol.HeartReque" +
       "st\022^\n\030LoginCheckAccountRequest\030\002 \001(\0132<.c" +
       "om.randioo.market_server.protocol.LoginC" +
@@ -1722,7 +1786,9 @@ public final class ClientMessage {
       "ol.ThirtyMinkRequest\022J\n\016SixMinkRequest\030\025" +
       " \001(\01322.com.randioo.market_server.protoco" +
       "l.SixMinkRequest\022<\n\007CSHeart\030\026 \001(\0132+.com." +
-      "randioo.market_server.protocol.CSHeart"
+      "randioo.market_server.protocol.CSHeart\022P" +
+      "\n\021ActiveInfoRequest\030\027 \001(\01325.com.randioo." +
+      "market_server.protocol.ActiveInfoRequest"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1734,7 +1800,7 @@ public final class ClientMessage {
           internal_static_com_randioo_market_server_protocol_CS_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_randioo_market_server_protocol_CS_descriptor,
-              new java.lang.String[] { "HeartRequest", "LoginCheckAccountRequest", "GmCmdRequest", "LoginCreateRoleRequest", "LoginGetRoleDataRequest", "SystemInfoRequest", "GoodsTyRequest", "UserInfoRequest", "SellerMyRequest", "SellerRequest", "BuyerRequest", "RevokeSellerRequest", "GoodsRequest", "DealRequest", "KRequest", "DayClickRequest", "MinkClickRequest", "OneMinkRequest", "FifMinkRequest", "ThirtyMinkRequest", "SixMinkRequest", "CSHeart", },
+              new java.lang.String[] { "HeartRequest", "LoginCheckAccountRequest", "GmCmdRequest", "LoginCreateRoleRequest", "LoginGetRoleDataRequest", "SystemInfoRequest", "GoodsTyRequest", "UserInfoRequest", "SellerMyRequest", "SellerRequest", "BuyerRequest", "RevokeSellerRequest", "GoodsRequest", "DealRequest", "KRequest", "DayClickRequest", "MinkClickRequest", "OneMinkRequest", "FifMinkRequest", "ThirtyMinkRequest", "SixMinkRequest", "CSHeart", "ActiveInfoRequest", },
               com.randioo.market_server.protocol.ClientMessage.CS.class,
               com.randioo.market_server.protocol.ClientMessage.CS.Builder.class);
           return null;

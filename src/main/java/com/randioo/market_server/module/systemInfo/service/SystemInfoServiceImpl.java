@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.protobuf.GeneratedMessage;
 import com.randioo.market_server.cache.file.TimingConfigCache;
+import com.randioo.market_server.dao_remote.CurrencyDAO;
 import com.randioo.market_server.entity.bo.Role;
 import com.randioo.market_server.entity.file.TimingConfig;
 import com.randioo.market_server.module.Constant;
@@ -28,11 +29,14 @@ import com.randioo.randioo_server_base.utils.TimeUtils;
 public class SystemInfoServiceImpl extends ObserveBaseService implements SystemInfoService {
 	@Autowired
 	private Role roleChange;
+//	@Autowired
+//	private CurrencyDAO currencyDAO;
 	
 
 	@Override
 	public void initService() {
 		 ServiceJudge();
+//		 currencyDAO.getType(29);
 	}
 
 	@Override

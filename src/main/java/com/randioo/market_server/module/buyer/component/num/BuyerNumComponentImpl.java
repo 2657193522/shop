@@ -38,7 +38,7 @@ public class BuyerNumComponentImpl extends ObserveBaseService implements BuyerNu
 	 * 交易买家改变数量
 	 */
 	@Override
-	public void updateNumber(String sellAccount, String buyAccount,TradingBO tradingBO) {
+	public void updateNumber(String sellAccount, String buyAccount, TradingBO tradingBO) {
 		// TODO Auto-generated method stub
 		Role buyRole = buyerRoleComponent.getRole(buyAccount);
 		Role sellRole = buyerRoleComponent.getRole(sellAccount);
@@ -47,9 +47,10 @@ public class BuyerNumComponentImpl extends ObserveBaseService implements BuyerNu
 		if (buyNum != null) {
 			tradingBO.setTrad_before_count(buyNum.getNum_count());
 			// 修改其他数据库
-			updateBuyNumber(buyRole.getRoleId(), tradingBO.getTrad_count(), tradingBO.getTrad_type(), tradingBO.getTrad_sum(), buyRole, buyNum);
-			buyNum.setNum_count(buyNum.getNum_count() +  tradingBO.getTrad_count());
-			buyNum.setOperation_count(buyNum.getOperation_count() +  tradingBO.getTrad_count());
+			updateBuyNumber(buyRole.getRoleId(), tradingBO.getTrad_count(), tradingBO.getTrad_type(),
+					tradingBO.getTrad_sum(), buyRole, buyNum);
+			buyNum.setNum_count(buyNum.getNum_count() + tradingBO.getTrad_count());
+			buyNum.setOperation_count(buyNum.getOperation_count() + tradingBO.getTrad_count());
 			buyNum.setOperation_time(TimeUtils.getDetailTimeStr());
 			// 通知
 			noticeNumber(sellRole, buyRole, buyNum, sellNum);

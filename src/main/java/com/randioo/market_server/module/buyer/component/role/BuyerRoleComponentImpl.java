@@ -12,7 +12,6 @@ import com.randioo.market_server.entity.bo.TradingBO;
 import com.randioo.randioo_server_base.db.GameDB;
 import com.randioo.randioo_server_base.lock.CacheLockUtil;
 import com.randioo.randioo_server_base.service.ObserveBaseService;
-import com.randioo.randioo_server_base.template.EntityRunnable;
 
 @Service("buyerRoleComponent")
 public class BuyerRoleComponentImpl extends ObserveBaseService implements BuyerRoleComponent {
@@ -33,10 +32,10 @@ public class BuyerRoleComponentImpl extends ObserveBaseService implements BuyerR
 	}
 
 	@Override
-	public void updateSellerRole(String sellAccount, TradingBO tradingBO,int count) {
+	public void updateSellerRole(String sellAccount, TradingBO tradingBO) {
 		Role sellerRole = getRole(sellAccount);
 		if (sellerRole != null) {
-			updateSeller(sellerRole, tradingBO,count);
+			updateSeller(sellerRole, tradingBO);
 		}
 	}
 
@@ -54,16 +53,16 @@ public class BuyerRoleComponentImpl extends ObserveBaseService implements BuyerR
 
 	/**
 	 * 修改买的用户数量资金
-	 * 
 	 * @param buyerRole
 	 * @param trading
 	 */
 	private void updateBuyer(Role buyerRole, TradingBO trading) {
-		 Lock lock = CacheLockUtil.getLock(Role.class, buyerRole.getRoleId());
-		 try {
-		 lock.lock();
+		// Lock lock = CacheLockUtil.getLock(Role.class, buyerRole.getRoleId());
+		// try {
+		// lock.lock();
 		double price = 0.00;
 		trading.setTrad_before_rmb(buyerRole.getRole_rmbA());
+		// 扣除金额
 		if (buyerRole.getRole_rmbA() - trading.getTrad_poundage() - trading.getTrad_sum() >= 0) {
 			if (buyerRole.getVip_level() == 0) {
 				buyerRole.setRole_rmbA(buyerRole.getRole_rmbA() - trading.getTrad_poundage() - trading.getTrad_sum());
@@ -76,19 +75,20 @@ public class BuyerRoleComponentImpl extends ObserveBaseService implements BuyerR
 				trading.setTrad_after_rmb(buyerRole.getRole_rmbA());
 			}
 		}
-		updateBuyMember(buyerRole.getRoleId(), price);
-		gameDB.getUpdatePool().submit(new EntityRunnable<Role>(buyerRole) {
-			@Override
-			public void run(Role entity) {
-				roleDAO.update(entity);
-			}
-		});
-		 } finally {
-		 lock.unlock();
-		 }
+		updateBuyMember(trading.getTrad_poundage() + trading.getTrad_sum(),buyerRole.getRoleId());
+		// gameDB.getUpdatePool().submit(new EntityRunnable<Role>(buyerRole) {
+		// @Override
+		// public void run(Role entity) {
+		//修改购买的用户金额
+		roleDAO.update(buyerRole);
+		// }
+		// });
+		// } finally {
+		// lock.unlock();
+		// }
 	}
 
-	private void updateBuyMember(int roleId, double price) {
+	private void updateBuyMember(double price,int roleId) {
 		memberDAO.jianUpdate(price, roleId);
 	}
 
@@ -98,14 +98,14 @@ public class BuyerRoleComponentImpl extends ObserveBaseService implements BuyerR
 	 * @param sellerRole
 	 * @param trading
 	 */
-	private void updateSeller(Role sellerRole, TradingBO trading,int count) {
+	private void updateSeller(Role sellerRole, TradingBO trading) {
 		Lock lock = CacheLockUtil.getLock(Role.class, sellerRole.getRoleId());
 		try {
 			lock.lock();
 			double price = 0.00;
 			trading.setTrad_before_rmb(sellerRole.getRole_rmbA());
-			trading.setTrad_before_count(count);
-			trading.setTrad_after_count(count);
+//			trading.setTrad_before_count(count);
+//			trading.setTrad_after_count(count);
 			if (sellerRole.getVip_level() == 0) {
 				sellerRole.setRole_rmbA(sellerRole.getRole_rmbA() - trading.getTrad_poundage() + trading.getTrad_sum());
 				price = trading.getTrad_sum() - trading.getTrad_poundage();
@@ -116,13 +116,15 @@ public class BuyerRoleComponentImpl extends ObserveBaseService implements BuyerR
 				trading.setTrad_poundage(0);
 				trading.setTrad_after_rmb(sellerRole.getRole_rmbA());
 			}
-			updateSellRole(price, sellerRole.getRoleId());
-			gameDB.getUpdatePool().submit(new EntityRunnable<Role>(sellerRole) {
-				@Override
-				public void run(Role entity) {
-					roleDAO.update(entity);
-				}
-			});
+			updateSellRole(trading.getTrad_sum() - trading.getTrad_poundage(), sellerRole.getRoleId());
+			// gameDB.getUpdatePool().submit(new
+			// EntityRunnable<Role>(sellerRole) {
+			// @Override
+			// public void run(Role entity) {
+			//修改出售用户的金额
+			roleDAO.update(sellerRole);
+			// }
+			// });
 		} finally {
 			lock.unlock();
 		}

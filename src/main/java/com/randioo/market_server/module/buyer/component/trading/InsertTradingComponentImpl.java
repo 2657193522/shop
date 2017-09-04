@@ -17,7 +17,6 @@ import com.randioo.market_server.dao.GoodsDAO;
 import com.randioo.market_server.dao.SellerDAO;
 import com.randioo.market_server.dao.TradingDAO;
 import com.randioo.market_server.entity.bo.BuyerBO;
-import com.randioo.market_server.entity.bo.NumbersBO;
 import com.randioo.market_server.entity.bo.Role;
 import com.randioo.market_server.entity.bo.SellerBO;
 import com.randioo.market_server.entity.bo.TradingBO;
@@ -101,54 +100,66 @@ public class InsertTradingComponentImpl extends ObserveBaseService implements In
 					tradingBO = new TradingBO();
 					int id = idClassCreator.getId(TradingBO.class);
 					// 设置买的成交单
-					tradingBO =setBuyTrading(seller, tradingBO, buyerBo, id);
+					tradingBO = setBuyTrading(seller, tradingBO, buyerBo, id);
 					// 计算数目成交
 					count = this.matchCount(seller, tradingBO, buyCount, delSet);
 					// 修改商品详情
-					Role buyRole=buyerRoleComponent.getRole(buyerBo.getBuy_account());
-					goodsDao.updateGoodsBuyer(String.valueOf(buyRole.getRoleId()), Constant.NO, id, TimeUtils.getDetailTimeStr(),
-							sellId, Constant.YES, buyerBo.getBuy_count());
+					Role buyRole = buyerRoleComponent.getRole(buyerBo.getBuy_account());
+					goodsDao.updateGoodsBuyer(String.valueOf(buyRole.getRoleId()), Constant.NO, id,
+							TimeUtils.getDetailTimeStr(), sellId, Constant.YES, buyerBo.getBuy_count());
 					// 改变相关缓存数据
 					sellerCacheComponent.deleteSeller(seller);
-					// 修改卖的用户，改数据库
+					// 修改出售信息，更新数据库
 					sellerDeleteService.updateSeller(seller);
-					// 修改买家用户金额
-					buyerRoleComponent.updateBuyerRole(buyerBo.getBuy_account(), tradingBO);
-//					// 修改买家的用户数量
-//					buyerNumComponent.updateNumber(seller.getSell_account(), buyerBo.getBuy_account(),tradingBO);
+					// // 修改买家用户金额
+					// buyerRoleComponent.updateBuyerRole(buyerBo.getBuy_account(),
+					// tradingBO);
+					// // 修改买家的用户数量
+					// buyerNumComponent.updateNumber(seller.getSell_account(),
+					// buyerBo.getBuy_account(),tradingBO);
+
 					// 通知发生交易信息改变
 					this.noticeSeller(buyerBo.getBuy_account(), tradingBO.getTrad_count(), seller.getSell_account());
 					// 生成成交数据生成K线
 					notifyObservers(Constant.NOTICE, tradingBO);
-					//主推买家卖家委托信息
-					sellerSelectService.scMySellerRequesr(seller.getSell_account());
-					sellerSelectService.scMySellerRequesr(buyerBo.getBuy_account());
-					//加入缓存
+					//
+					// 主推买家卖家委托信息
+					// sellerSelectService.scMySellerRequesr(seller.getSell_account());
+					// sellerSelectService.scMySellerRequesr(buyerBo.getBuy_account());
+
+					// 加入缓存
 					addTradingList(tradingBO);
 					TradingData.Builder tradBuilder = TradingData.newBuilder();
-					builder.addTradingData(
-							tradBuilder.setBuyAccount(tradingBO.getTrad_account()).setBuyId(tradingBO.getTrad_buy_id())
-									.setMoney((int) (tradingBO.getTrad_poundage() * 100))
-									.setTradCount(tradingBO.getTrad_count()).setSellAccount(seller.getSell_account())
-									.setTradPrice((int)(tradingBO.getTrad_price() * 100))
-									.setTradSum((int) (tradingBO.getTrad_sum() * 100))
-									.setTradTime(tradingBO.getTrad_time()).setTradId(tradingBO.getTrad_id()));
+					builder.addTradingData(tradBuilder.setBuyAccount(tradingBO.getTrad_account())
+							.setBuyId(tradingBO.getTrad_buy_id()).setMoney((int) (tradingBO.getTrad_poundage() * 100))
+							.setTradCount(tradingBO.getTrad_count()).setSellAccount(seller.getSell_account())
+							.setTradPrice((int) (tradingBO.getTrad_price() * 100))
+							.setTradSum((int) (tradingBO.getTrad_sum() * 100)).setTradTime(tradingBO.getTrad_time())
+							.setTradId(tradingBO.getTrad_id()));
 
+					buyerRoleComponent.updateBuyerRole(buyerBo.getBuy_account(), tradingBO);
+					TradingBO tradingSeller = insertTradingSeller(tradingBO, seller.getSell_account());
+					buyerRoleComponent.updateSellerRole(seller.getSell_account(), tradingSeller);
+					insertSellerTrading(tradingSeller);
 					gameDB.getInsertPool().submit(new EntityRunnable<TradingBO>(tradingBO) {
 						@Override
 						public void run(TradingBO entity) {
 							tradingDAO.insert(entity);
 						}
 					});
-					//改变卖的用户信息
-					insertTradingSeller(tradingBO, seller.getSell_account());
+					// 修改买家用户金额
+					// buyerRoleComponent.updateBuyerRole(buyerBo.getBuy_account(),
+					// tradingBO);
 					// 修改买家的用户数量
-					buyerNumComponent.updateNumber(seller.getSell_account(), buyerBo.getBuy_account(),tradingBO);
+					buyerNumComponent.updateNumber(seller.getSell_account(), buyerBo.getBuy_account(), tradingBO);
+					// 主推买家卖家委托信息
+					sellerSelectService.scMySellerRequesr(seller.getSell_account());
+					sellerSelectService.scMySellerRequesr(buyerBo.getBuy_account());
 				}
 			}
 			sellerListBySellId.removeAll(delSet);
 			SessionUtils.sc(session, SC.newBuilder().setBuyerResponse(builder).build());
-			scService.scGoodsTy(buyerBo.getBuy_type());
+			scService.scGoodsTy(buyerBo.getBuy_type());// 主推商品详细信息
 			refushMinkService.refushMink(buyerBo.getBuy_type());
 			Role role = buyerRoleComponent.getRole(buyerBo.getBuy_account());
 			loggerinfo(role,
@@ -173,7 +184,7 @@ public class InsertTradingComponentImpl extends ObserveBaseService implements In
 	 * @param tradingBO
 	 * @param sell_account
 	 */
-	private void insertTradingSeller(TradingBO tradingBO, String sell_account) {
+	private TradingBO insertTradingSeller(TradingBO tradingBO, String sell_account) {
 		TradingBO trading = new TradingBO();
 		int id = idClassCreator.getId(TradingBO.class);
 		trading.setTrad_id(id);
@@ -183,13 +194,15 @@ public class InsertTradingComponentImpl extends ObserveBaseService implements In
 		trading.setTrad_price(tradingBO.getTrad_price());
 		trading.setTrad_type(tradingBO.getTrad_type());
 		trading.setTrad_sum(tradingBO.getTrad_sum());
-		trading.setTrad_poundage(tradingBO.getTrad_sum()*0.002);
+		trading.setTrad_poundage(tradingBO.getTrad_sum() * 0.002);
 		trading.setTrad_count(tradingBO.getTrad_count());
 		trading.setTrad_state(Constant.YES);
-		//修改卖家用户金额
-		NumbersBO numbersBO=buyerNumComponent.getNumber(sell_account, tradingBO.getTrad_type());
-		buyerRoleComponent.updateSellerRole(sell_account,trading,numbersBO.getNum_count());
-		
+		// 修改卖家用户金额
+		// NumbersBO numbersBO=buyerNumComponent.getNumber(sell_account,
+		// tradingBO.getTrad_type());
+		// 修改卖家用户金额
+		// buyerRoleComponent.updateSellerRole(sell_account,trading);
+
 		Role role2 = buyerRoleComponent.getRole(sell_account);
 		loggerinfo(role2,
 				"出售的用户成交单:" + ",成交单号:" + trading.getTrad_id() + ",购买订单号:" + trading.getTrad_buy_id() + ",成交价格:"
@@ -199,6 +212,10 @@ public class InsertTradingComponentImpl extends ObserveBaseService implements In
 
 		// System.out.println(System.currentTimeMillis());
 		addTradingList(trading);
+		return trading;
+	}
+
+	private void insertSellerTrading(TradingBO trading) {
 		gameDB.getInsertPool().submit(new EntityRunnable<TradingBO>(trading) {
 
 			@Override
@@ -213,12 +230,11 @@ public class InsertTradingComponentImpl extends ObserveBaseService implements In
 	 * 
 	 */
 	private int matchCount(SellerBO sellerBO, TradingBO tradingBO, int buyCount, Set<SellerBO> delSet) {
-//		GainsConfig config = GainsConfigCache.getConfig();
+		// GainsConfig config = GainsConfigCache.getConfig();
 		if (sellerBO.getSell_count() - sellerBO.getSell_overCount() >= buyCount) {
 			tradingBO.setTrad_count(buyCount);// 设置交易数量
 			tradingBO.setTrad_sum(DateUtils.changeSum(buyCount, sellerBO.getSell_price()));// 设置交易总价
-			String s = String.format("%.2f", tradingBO.getTrad_sum() * 0.002);// 设置手续费
-			tradingBO.setTrad_poundage(Double.parseDouble(s));
+			tradingBO.setTrad_poundage(tradingBO.getTrad_sum() * 0.002);
 			// 卖家设置成交数量
 			sellerBO.setSell_overCount(sellerBO.getSell_overCount() + buyCount);
 			// 当成交数量和出售数量同等时，设置卖单状态为停止交易

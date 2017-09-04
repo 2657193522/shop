@@ -92,7 +92,7 @@ public class SellerDeleteServiceImpl extends ObserveBaseService implements Selle
 					updateGoodsRevoke(seller);
 					removeSeller(seller);
 					deleteSet.add(seller);
-					seller.setSell_active(Constant.STOP_SELL);
+					seller.setSell_active(Constant.SOME_SELL);
 					updateSeller(seller);
 //					updateRevokeNumber(type, seller.getSell_count() - seller.getSell_overCount(), sellAccount);
 					sellerLogicNumService.updateRevokeNumbers(seller,seller.getSell_count() - seller.getSell_overCount());
@@ -243,7 +243,7 @@ public class SellerDeleteServiceImpl extends ObserveBaseService implements Selle
 	private List<SellerBO> getSellerListByAll(int sellId, int active) {
 		String all = String.valueOf(sellId) + String.valueOf(active);
 		List<SellerBO> sellerList = SellerCache.getListByAll(all);
-		if (sellerList == null) {
+		if (sellerList == null||sellerList.size()==0) {
 			sellerList = new ArrayList<>();
 			List<SellerBO> list = sellerDao.selectSellerByAll(sellId, active);
 			if (list != null) {
@@ -262,7 +262,7 @@ public class SellerDeleteServiceImpl extends ObserveBaseService implements Selle
 	private List<SellerBO> getSellerByAccount(String account, int active) {
 		String accountActive = account + String.valueOf(active);
 		List<SellerBO> sellerList = SellerCache.getSellerListByAccount(accountActive);
-		if (sellerList == null) {
+		if (sellerList == null||sellerList.size()==0) {
 			sellerList = new ArrayList<>();
 			List<SellerBO> list = sellerDao.getListByAccount(account, active);
 			if (list != null) {
@@ -282,7 +282,7 @@ public class SellerDeleteServiceImpl extends ObserveBaseService implements Selle
 	private List<SellerBO> deleteSellerType(String type) {
 		String types = type + String.valueOf(Constant.START_SELL);
 		List<SellerBO> sellerList = SellerCache.getListByType(types);
-		if (sellerList == null) {
+		if (sellerList == null||sellerList.size()==0) {
 			sellerList = new ArrayList<>();
 			List<SellerBO> list = sellerDao.ListByType(type, Constant.START_SELL);
 			if (list != null) {

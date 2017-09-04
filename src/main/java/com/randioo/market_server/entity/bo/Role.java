@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 public class Role extends GameRole {
 
 	private double role_rmbA;// 用户余额
-
+	
 	private String passWord;
-	private boolean judge;
 	private int vip_level;
+	private boolean judge;
 
 	public int getVip_level() {
 		return vip_level;

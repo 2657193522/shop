@@ -554,6 +554,8 @@ public class SwitchScheduler {
 		return weekday;
 	}
 
+	// public static final String s = "";
+	// @Scheduled(cron = s)
 	@Scheduled(cron = "0 00 16 * * ?")
 	public void deleteMessage() {
 
@@ -577,7 +579,7 @@ public class SwitchScheduler {
 			// + seller.getSell_account() + "撤销的价格" + seller.getSell_price() +
 			// "撤销类型" + seller.getSell_type()
 			// + "用户撤销之前数据" + num.getNum_count());
-			seller.setSell_active(Constant.STOP_SELL);
+			seller.setSell_active(Constant.SYSTEM_RRVOKE);
 			sellerLogicNumComponent.updateRevokeNumbers(seller, seller.getSell_count() - seller.getSell_overCount());
 			sellerDeleteService.updateGoodsRevoke(seller);
 
@@ -591,7 +593,7 @@ public class SwitchScheduler {
 				}
 			});
 			sellerSelectService.scMySellerRequesr(seller.getSell_account());
-			
+
 			logger.info("撤销之后用户帐号" + role.getAccount() + "用户金额" + role.getRole_rmbA() + "撤销用户帐号"
 					+ seller.getSell_account() + "撤销的价格" + seller.getSell_price() + "撤销类型" + seller.getSell_type()
 					+ "用户撤销之hou数据" + num.getNum_count());
@@ -620,10 +622,20 @@ public class SwitchScheduler {
 		for (String s : strings) {
 			sellerSelectService.scMySellerRequesr(s);
 		}
-
-		Map<String, List<TradingBO>> tradingLists = TradingCache.getTradingMap();
-		if (tradingLists != null) {
-			tradingLists.clear();
+		if (sellerList != null) {
+			sellerList.clear();
+		}
+		Map<String, List<SellerBO>> sellerListBy = SellerCache.getSellerByType();
+		if (sellerListBy != null) {
+			sellerListBy.clear();
+		}
+		Map<String, List<SellerBO>> sell = SellerCache.getSellerMapByAccount();
+		if (sell != null) {
+			sell.clear();
+		}
+		Map<String, List<TradingBO>> t = TradingCache.getTradingMap();
+		if (t != null) {
+			t.clear();
 		}
 	}
 
@@ -706,7 +718,7 @@ public class SwitchScheduler {
 			tradingLists.clear();
 		}
 	}
-	
+
 	@Scheduled(cron = "0 30 15 * * ?")
 	public void getDayK() {
 
@@ -715,9 +727,9 @@ public class SwitchScheduler {
 			return;
 		}
 		TimingConfig timing = TimingConfigCache.getConfigById(weekDay);
-		if (timing.panduan == 1) {
-			return;
-		}
+		// if (timing.panduan == 1) {
+		// return;
+		// }
 		Map<String, List<TradingBO>> tradingMap = DayKCache.getTradMapToDay();
 		List<String> typeList = TypeCache.getTypeList();
 		if (typeList != null) {
@@ -738,6 +750,9 @@ public class SwitchScheduler {
 				if (tradList == null || tradList.size() == 0) {
 					tradList = new ArrayList<>();
 					List<TradingBO> trad = tradingDao.selectListByTypeToday(typeDayk.getKey());
+					if (trad == null) {
+						return;
+					}
 					if (trad != null) {
 						tradList.addAll(trad);
 					}

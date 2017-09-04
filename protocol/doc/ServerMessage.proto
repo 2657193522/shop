@@ -57,8 +57,10 @@ message SC{
 	optional ThirtyMinkResponse ThirtyMinkResponse= 31;//30分钟K线数据
 	optional SixMinkResponse SixMinkResponse= 32;//一小时K线数据
 	
+ 	optional ActiveInfoResponse ActiveInfoResponse= 33;//激活协议
 	
 	
 	
 	
-} // 32
+	
+} // 33

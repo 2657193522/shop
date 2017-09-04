@@ -45,16 +45,16 @@ public class SellerSelectServiceImpl extends ObserveBaseService implements Selle
 		List<SellerBO> sellerList = getSellerByAccount(account);
 		Collections.sort(sellerList, goodsComparator);
 		if (sellerList != null) {
-			int c = 0;
+//			int c = 0;
 			for (SellerBO seller : sellerList) {
-				if (c >= 10) {
-					break;
-				}
+//				if (c >= 10) {
+//					break;
+//				}
 				builders.addGoodsTypeData(
 						GoodsTypeData.newBuilder().setCount(seller.getSell_count() - seller.getSell_overCount())
 								.setPrice(String.valueOf(seller.getSell_price())).setSellId(seller.getSell_id())
 								.setType(getTypeId(seller.getSell_type())).setSellAccount(account));
-				c++;
+//				c++;
 			}
 		}
 		SC sc = SC.newBuilder().setSCSellerMyMessage(builders).build();
@@ -65,7 +65,7 @@ public class SellerSelectServiceImpl extends ObserveBaseService implements Selle
 	public List<SellerBO> getSellerByAccount(String account) {
 		String accountActive = account + String.valueOf(Constant.YES);
 		List<SellerBO> sellerList = SellerCache.getSellerListByAccount(accountActive);
-		if (sellerList == null) {
+		if (sellerList == null || sellerList.size() == 0) {
 			sellerList = new ArrayList<>();
 			List<SellerBO> list = sellerDao.getListByAccount(account, Constant.YES);
 			if (list != null) {

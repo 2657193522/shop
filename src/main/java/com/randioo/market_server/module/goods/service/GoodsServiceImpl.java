@@ -35,6 +35,7 @@ import com.randioo.market_server.protocol.GoodsTy.GoodsTyResponse;
 import com.randioo.market_server.protocol.ServerMessage.SC;
 import com.randioo.market_server.util.DateUtils;
 import com.randioo.randioo_server_base.service.ObserveBaseService;
+import com.randioo.randioo_server_base.utils.TimeUtils;
 
 @Service("goodsService")
 public class GoodsServiceImpl extends ObserveBaseService implements GoodsService {
@@ -65,8 +66,9 @@ public class GoodsServiceImpl extends ObserveBaseService implements GoodsService
 		GoodsTyResponse.Builder builder = GoodsTyResponse.newBuilder();
 		GainsConfig config = GainsConfigCache.getConfig();
 		CountConfig countConfig = CountConfigCache.getConfig();
-		if(type==null||type.equals("")){
-			return SC.newBuilder().setGoodsTyResponse(builder.setErrorCode(ErrorCode.INFORMATION_IS_NOT.getNumber())).build();
+		if (type == null || type.equals("")) {
+			return SC.newBuilder().setGoodsTyResponse(builder.setErrorCode(ErrorCode.INFORMATION_IS_NOT.getNumber()))
+					.build();
 		}
 		List<String> typeList = TypeCache.getTypeList();
 		if (!typeList.contains(type)) {
@@ -107,6 +109,9 @@ public class GoodsServiceImpl extends ObserveBaseService implements GoodsService
 		TradingBO trading = tradingDao.getEndTrading(type);
 		if (trading != null)
 			timePrice = trading.getTrad_price();
+		if (DateUtils.getKTime(TimeUtils.getDetailTimeStr(), type) == -2) {
+			timePrice = day.getDay_end_price();
+		}
 		// 返回
 		List<TradingBO> daykMap = getTradingListByToDay(type, Constant.NO);
 		int j = daykMap.size();
@@ -118,7 +123,7 @@ public class GoodsServiceImpl extends ObserveBaseService implements GoodsService
 		count = count * 2;
 		sumPrice = DateUtils.getTwoDouble(sumPrice * 2);
 		// 涨幅率
-		gains = DateUtils.getTwoDouble(((timePrice - startPrice) / startPrice)*100);
+		gains = DateUtils.getTwoDouble(((timePrice - startPrice) / startPrice) * 100);
 		if (count != 0) {
 			junjia = Double.parseDouble(String.format("%.2f", sumPrice / count));
 		}
@@ -151,7 +156,7 @@ public class GoodsServiceImpl extends ObserveBaseService implements GoodsService
 						.setDownPrice((int) (Double.parseDouble(DateUtils.getDouble(drop)) * 100))
 						.setStartPrice((int) (Double.parseDouble(DateUtils.getDouble(startPrice)) * 100))
 						.setCount(count).setTimePrice((int) (Double.parseDouble(DateUtils.getDouble(timePrice)) * 100))
-						.setTypeName(currencyDao.getType(Integer.parseInt(type))).setGains((int)(gains * 100))
+						.setTypeName(currencyDao.getType(Integer.parseInt(type))).setGains((int) (gains * 100))
 						.setType(getTypeId(type)).setPoundage(config.poundage).setMaxCount(countConfig.count)
 						.setSumPrice((int) (sumPrice * 100))
 						.setJunjia((int) (Double.parseDouble(DateUtils.getDouble(junjia)) * 100)))

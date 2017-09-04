@@ -11,4 +11,5 @@ public interface MemberDAO extends BaseDao<Member> {
 	//用户ID
 	void addUpdate(@Param("rmb") double rmb,@Param("member_id") int member_id);
 	void jianUpdate(@Param("rmb") double rmb,@Param("member_id") int member_id);
+	Member getMember(@Param("uid") String uid);
 }

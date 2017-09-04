@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.randioo.market_server.dao_remote.CurencyUserDAO">
-		<!-- update -->
+	<!-- update -->
 	<update id="jianUpdate">
 		update
 		yang_currency_user
@@ -24,5 +24,36 @@
 		and
 		currency_id=#{currency_id}
 	</update>
-	
+
+	<select id="getCurrency" resultType="CurencyUser">
+		select
+		cu_id as cu_id,
+		member_id as member_id,
+		currency_id as currency_id,
+		num as num,
+		forzen_num as forzen_num
+		from
+		yang_currency_user
+		where
+		member_id=#{member_id}
+		and
+		currency_id=#{currency_id}
+	</select>
+
+	<insert id="insert" parameterType="CurencyUser">
+		insert into
+		yang_currency_user(
+		cu_id,
+		member_id,
+		currency_id,
+		num,
+		forzen_num
+		) values(
+		#{cu_id},
+		#{member_id},
+		#{currency_id},
+		#{num},
+		#{forzen_num}
+		)
+	</insert>
 </mapper>

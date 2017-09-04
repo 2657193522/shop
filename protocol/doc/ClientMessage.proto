@@ -40,6 +40,8 @@ message CS{
 	optional ThirtyMinkRequest ThirtyMinkRequest= 20;//点击请求30分钟K数据
 	optional SixMinkRequest SixMinkRequest= 21;//点击请求1小时K数据
 	optional CSHeart CSHeart= 22;//心跳协议
-} // 22
+	
+	optional ActiveInfoRequest ActiveInfoRequest= 23;//激活协议
+} // 23
 
 

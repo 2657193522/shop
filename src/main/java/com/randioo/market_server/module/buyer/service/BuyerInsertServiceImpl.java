@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import com.google.protobuf.GeneratedMessage;
 import com.randioo.market_server.dao.BuyerDAO;
 import com.randioo.market_server.dao.ControlDAO;
+import com.randioo.market_server.dao_remote.CurencyUserDAO;
 import com.randioo.market_server.entity.bo.BuyerBO;
 import com.randioo.market_server.entity.bo.Role;
+import com.randioo.market_server.entity.bo_remote.CurencyUser;
 import com.randioo.market_server.module.Constant;
 import com.randioo.market_server.module.buyer.component.role.BuyerLevelComponent;
 import com.randioo.market_server.module.buyer.component.trading.InsertTradingComponent;
@@ -48,6 +50,8 @@ public class BuyerInsertServiceImpl extends ObserveBaseService implements BuyerI
 	private BuyerLevelComponent buyerLevelComponent;
 	@Autowired
 	private InsertTradingComponent insertTradingComponent;
+	@Autowired
+	private CurencyUserDAO curencyUserDAO;
 
 	public void insertBuyer(BuyerData buyerData, String buyAccount, IoSession session) {
 		Role role = sellerLogicNumService.getRoleByAccount(buyAccount);
@@ -63,6 +67,15 @@ public class BuyerInsertServiceImpl extends ObserveBaseService implements BuyerI
 			GeneratedMessage sc = SC.newBuilder()
 					.setBuyerResponse(
 							BuyerResponse.newBuilder().setErrorCode(ErrorCode.NOBUY_MYSELF_MESSAGE.getNumber()))
+					.build();
+			SessionUtils.sc(session, sc);
+			return;
+		}
+		CurencyUser curencyUser=curencyUserDAO.getCurrency(role.getRoleId(), Integer.parseInt(buyerData.getType()));
+		if(curencyUser==null){
+			GeneratedMessage sc = SC.newBuilder()
+					.setBuyerResponse(
+							BuyerResponse.newBuilder().setErrorCode(ErrorCode.INFORMATION_IS_NOT.getNumber()))
 					.build();
 			SessionUtils.sc(session, sc);
 			return;
@@ -83,9 +96,7 @@ public class BuyerInsertServiceImpl extends ObserveBaseService implements BuyerI
 			SessionUtils.sc(session, sc);
 			return;
 		}
-
 		// 验证交易密码是否OK
-
 		if (role.getVip_level() == 0) {
 			if (!MD5Util.string2MD5(buyerData.getPWD()).equals(role.getPassWord())) {
 				GeneratedMessage sc = SC.newBuilder()

@@ -8,9 +8,13 @@ import org.apache.mina.core.session.IoSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.randioo.market_server.dao.RoleDAO;
+import com.randioo.market_server.entity.bo.NumbersBO;
 import com.randioo.market_server.entity.bo.Role;
 import com.randioo.market_server.module.Constant;
+import com.randioo.market_server.module.seller.component.num.SellerLogicNumComponent;
 import com.randioo.market_server.protocol.Gm.SCFight;
+import com.randioo.market_server.protocol.Gm.SCNumberNotice;
 import com.randioo.market_server.protocol.ServerMessage.SC;
 import com.randioo.market_server.util.SessionUtils;
 import com.randioo.randioo_server_base.cache.SessionCache;
@@ -21,6 +25,10 @@ import com.randioo.randioo_server_base.template.EntityRunnable;
 public class HttpServletServiceImpl extends ObserveBaseService implements HttpServletService {
 	@Autowired
 	private Role roleChange;
+	@Autowired
+	private RoleDAO roleDAO;
+	@Autowired
+	private SellerLogicNumComponent sellerLogicNumComponent;
 
 	@Override
 	public void repair(int lockString, int time) {
@@ -85,5 +93,19 @@ public class HttpServletServiceImpl extends ObserveBaseService implements HttpSe
 		// }
 		// }, 3, TimeUnit.SECONDS);
 
+	}
+	@Override
+	public void scrmb(String account,String type) {
+		// TODO Auto-generated method stub
+		Role role=roleDAO.getRole(account);
+		if(role==null){
+			return;
+		}
+		NumbersBO number=sellerLogicNumComponent.getNumbers(account, type);
+		if(number==null){
+			return;
+		}
+		SC sc=SC.newBuilder().setSCNumberNotice(SCNumberNotice.newBuilder().setAccount(account).setRmbA(String.format("%.2f", role.getRole_rmbA())).setCount(number.getNum_count())).build();
+		SessionUtils.sc(role.getRoleId(), sc);
 	}
 }

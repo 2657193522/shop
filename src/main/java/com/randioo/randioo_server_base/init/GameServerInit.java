@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.google.protobuf.ExtensionRegistryLite;
 import com.google.protobuf.MessageLite;
-import com.randioo.GoContanst;
+import com.randioo.market_server.cache.file.PortConfigCache;
+import com.randioo.market_server.entity.file.PortConfig;
 import com.randioo.randioo_server_base.handler.GameServerHandlerAdapter;
 import com.randioo.randioo_server_base.net.WanServer;
 import com.randioo.randioo_server_base.protocol.protobuf.ProtoCodecFactory;
@@ -60,9 +61,9 @@ public class GameServerInit {
 		ProtocolCodecFilter protocolCodecFilter = new ProtocolCodecFilter(
 				new ProtoCodecFactory(messageLite, extensionRegistryLite));
 		keepAliveFilter.setForwardEvent(false);
-
+		PortConfig config=PortConfigCache.getConfig();
 		WanServer.startServer(protocolCodecFilter, keepAliveFilter, gameServerHandlerAdapter,
-				new InetSocketAddress(GoContanst.PORT));
+				new InetSocketAddress(config.port));
 		logger.info("socket start");
 	}
 }

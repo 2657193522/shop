@@ -10,6 +10,6 @@ public interface BuyerRoleComponent extends ObserveBaseServiceInterface {
 	
 	Role getRole(String account);
 	// 改变卖用户数量
-	void updateSellerRole(String sellAccount,TradingBO tradingBO,int count);
+	void updateSellerRole(String sellAccount,TradingBO tradingBO);
 	
 }

@@ -16,6 +16,7 @@ public class HttpInit {
 		httpServer.setPort(GlobleConfig.Int(GlobleEnum.PORT) + 10000);
 		httpServer.setRootPath("/market-server");
 		httpServer.addLiteServlet("/repair", (LiteServlet) SpringContext.getBean("systemHttpServlet"));
+		httpServer.addLiteServlet("/scrmb", (LiteServlet) SpringContext.getBean("rmbHttpServlet"));
 		try {
 			httpServer.init();
 		} catch (IOException e) {

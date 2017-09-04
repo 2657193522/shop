@@ -3,10 +3,25 @@ package com.randioo.market_server.entity.bo_remote;
 import com.randioo.randioo_server_base.db.DataEntity;
 
 public class CurencyUser extends DataEntity {
-	
+	private int cu_id;
 	private int member_id;//用户id
 	private int currency_id;//类型
 	private int num;//数量
+	private int forzen_num;
+	
+	
+	public int getCu_id() {
+		return cu_id;
+	}
+	public void setCu_id(int cu_id) {
+		this.cu_id = cu_id;
+	}
+	public int getForzen_num() {
+		return forzen_num;
+	}
+	public void setForzen_num(int forzen_num) {
+		this.forzen_num = forzen_num;
+	}
 	public int getMember_id() {
 		return member_id;
 	}
