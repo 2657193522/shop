@@ -3,6 +3,8 @@ package com.randioo.market_server;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.filter.keepalive.KeepAliveFilter;
 
+import com.randioo.market_server.cron.QuartzManager;
+import com.randioo.market_server.entity.file.TimeConfig;
 import com.randioo.market_server.handler.HeartTimeOutHandler;
 import com.randioo.market_server.protocol.ClientMessage.CS;
 import com.randioo.market_server.protocol.Heart.CSHeart;
@@ -50,6 +52,7 @@ public class market_serverApp {
 		gameServerInit.start();
 		GlobleConfig.set(GlobleEnum.LOGIN, true);
 		HttpInit.init();
-
+	
+		QuartzManager.openQuartz();
 	}
 }

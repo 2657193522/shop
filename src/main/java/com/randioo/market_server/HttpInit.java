@@ -23,7 +23,6 @@ public class HttpInit {
 			e.printStackTrace();
 		}
 	}
-
 	public static LiteHttpServer getHttpServer() {
 		return httpServer;
 	}

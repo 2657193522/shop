@@ -63,7 +63,6 @@ import com.randioo.randioo_server_base.utils.TimeUtils;
 
 @Component
 public class SwitchScheduler {
-
 	@Autowired
 	private MinkDAO minKDao;
 	@Autowired
@@ -571,32 +570,36 @@ public class SwitchScheduler {
 		}
 		List<SellerBO> list = sellerDAO.selectSellerByState(Constant.YES);
 		List<String> strings = new ArrayList<>();
-		for (SellerBO seller : list) {
-			Role role = sellerLogicNumComponent.getRoleByAccount(seller.getSell_account());
-			NumbersBO num = sellerLogicNumComponent.getNumbers(seller.getSell_account(), seller.getSell_type());
-			// logger.info("撤销之前用户帐号" + role.getAccount() + "用户金额" +
-			// role.getRole_rmbA() + "撤销用户帐号"
-			// + seller.getSell_account() + "撤销的价格" + seller.getSell_price() +
-			// "撤销类型" + seller.getSell_type()
-			// + "用户撤销之前数据" + num.getNum_count());
-			seller.setSell_active(Constant.SYSTEM_RRVOKE);
-			sellerLogicNumComponent.updateRevokeNumbers(seller, seller.getSell_count() - seller.getSell_overCount());
-			sellerDeleteService.updateGoodsRevoke(seller);
+		if (list != null) {
+			for (SellerBO seller : list) {
+				Role role = sellerLogicNumComponent.getRoleByAccount(seller.getSell_account());
+				NumbersBO num = sellerLogicNumComponent.getNumbers(seller.getSell_account(), seller.getSell_type());
+				// logger.info("撤销之前用户帐号" + role.getAccount() + "用户金额" +
+				// role.getRole_rmbA() + "撤销用户帐号"
+				// + seller.getSell_account() + "撤销的价格" + seller.getSell_price()
+				// +
+				// "撤销类型" + seller.getSell_type()
+				// + "用户撤销之前数据" + num.getNum_count());
+				seller.setSell_active(Constant.SYSTEM_RRVOKE);
+				sellerLogicNumComponent.updateRevokeNumbers(seller,
+						seller.getSell_count() - seller.getSell_overCount());
+				sellerDeleteService.updateGoodsRevoke(seller);
 
-			sellerDeleteService.updateSeller(seller);
-			strings.add(seller.getSell_account());
-			gameDB.getUpdatePool().submit(new EntityRunnable<SellerBO>(seller) {
+				sellerDeleteService.updateSeller(seller);
+				strings.add(seller.getSell_account());
+				gameDB.getUpdatePool().submit(new EntityRunnable<SellerBO>(seller) {
 
-				@Override
-				public void run(SellerBO entity) {
-					sellerDAO.update(entity);
-				}
-			});
-			sellerSelectService.scMySellerRequesr(seller.getSell_account());
+					@Override
+					public void run(SellerBO entity) {
+						sellerDAO.update(entity);
+					}
+				});
+				sellerSelectService.scMySellerRequesr(seller.getSell_account());
 
-			logger.info("撤销之后用户帐号" + role.getAccount() + "用户金额" + role.getRole_rmbA() + "撤销用户帐号"
-					+ seller.getSell_account() + "撤销的价格" + seller.getSell_price() + "撤销类型" + seller.getSell_type()
-					+ "用户撤销之hou数据" + num.getNum_count());
+				logger.info("撤销之后用户帐号" + role.getAccount() + "用户金额" + role.getRole_rmbA() + "撤销用户帐号"
+						+ seller.getSell_account() + "撤销的价格" + seller.getSell_price() + "撤销类型" + seller.getSell_type()
+						+ "用户撤销之hou数据" + num.getNum_count());
+			}
 		}
 		Map<String, List<SellerBO>> sellerList = SellerCache.getSellerByAll();
 		Iterator<Entry<String, List<SellerBO>>> it = sellerList.entrySet().iterator();
@@ -726,7 +729,7 @@ public class SwitchScheduler {
 		if (weekDay == 1 || weekDay == 7) {
 			return;
 		}
-		TimingConfig timing = TimingConfigCache.getConfigById(weekDay);
+//		TimingConfig timing = TimingConfigCache.getConfigById(weekDay);
 		// if (timing.panduan == 1) {
 		// return;
 		// }

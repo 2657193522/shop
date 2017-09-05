@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.protobuf.GeneratedMessage;
-import com.randioo.market_server.cache.local.NumberCache;
 import com.randioo.market_server.dao.NumberDAO;
 import com.randioo.market_server.dao.RoleDAO;
 import com.randioo.market_server.dao_remote.CurencyUserDAO;
@@ -96,16 +95,16 @@ public class UserInfoServiceImpl extends ObserveBaseService implements UserInfoS
 	 * @param type
 	 * @return
 	 */
-	private NumbersBO getNum(String account, String type) {
-		Role role = getRole(account);
-		String accountType = String.valueOf(role.getRoleId()) + type;
-		NumbersBO num = NumberCache.getNumber(accountType);
-		if (num == null) {
-			num = numberDao.selectNumber(role.getRoleId(), type);
-			if (num != null) {
-				NumberCache.getNumberMap().put(accountType, num);
-			}
-		}
-		return num;
-	}
+//	private NumbersBO getNum(String account, String type) {
+//		Role role = getRole(account);
+//		String accountType = String.valueOf(role.getRoleId()) + type;
+//		NumbersBO num = NumberCache.getNumber(accountType);
+//		if (num == null) {
+//			num = numberDao.selectNumber(role.getRoleId(), type);
+//			if (num != null) {
+//				NumberCache.getNumberMap().put(accountType, num);
+//			}
+//		}
+//		return num;
+//	}
 }

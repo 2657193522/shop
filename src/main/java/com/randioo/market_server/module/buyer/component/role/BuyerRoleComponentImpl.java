@@ -9,7 +9,6 @@ import com.randioo.market_server.dao.RoleDAO;
 import com.randioo.market_server.dao_remote.MemberDAO;
 import com.randioo.market_server.entity.bo.Role;
 import com.randioo.market_server.entity.bo.TradingBO;
-import com.randioo.randioo_server_base.db.GameDB;
 import com.randioo.randioo_server_base.lock.CacheLockUtil;
 import com.randioo.randioo_server_base.service.ObserveBaseService;
 
@@ -18,8 +17,6 @@ public class BuyerRoleComponentImpl extends ObserveBaseService implements BuyerR
 
 	@Autowired
 	private RoleDAO roleDAO;
-	@Autowired
-	private GameDB gameDB;
 	@Autowired
 	private MemberDAO memberDAO;
 
@@ -60,17 +57,17 @@ public class BuyerRoleComponentImpl extends ObserveBaseService implements BuyerR
 		// Lock lock = CacheLockUtil.getLock(Role.class, buyerRole.getRoleId());
 		// try {
 		// lock.lock();
-		double price = 0.00;
+//		double price = 0.00;
 		trading.setTrad_before_rmb(buyerRole.getRole_rmbA());
 		// 扣除金额
 		if (buyerRole.getRole_rmbA() - trading.getTrad_poundage() - trading.getTrad_sum() >= 0) {
 			if (buyerRole.getVip_level() == 0) {
 				buyerRole.setRole_rmbA(buyerRole.getRole_rmbA() - trading.getTrad_poundage() - trading.getTrad_sum());
-				price = trading.getTrad_poundage() + trading.getTrad_sum();
+//				price = trading.getTrad_poundage() + trading.getTrad_sum();
 				trading.setTrad_after_rmb(buyerRole.getRole_rmbA());
 			} else if (buyerRole.getVip_level() == 1) {
 				buyerRole.setRole_rmbA(buyerRole.getRole_rmbA() - trading.getTrad_sum());
-				price = trading.getTrad_sum();
+//				price = trading.getTrad_sum();
 				trading.setTrad_poundage(0);
 				trading.setTrad_after_rmb(buyerRole.getRole_rmbA());
 			}
@@ -102,17 +99,17 @@ public class BuyerRoleComponentImpl extends ObserveBaseService implements BuyerR
 		Lock lock = CacheLockUtil.getLock(Role.class, sellerRole.getRoleId());
 		try {
 			lock.lock();
-			double price = 0.00;
+//			double price = 0.00;
 			trading.setTrad_before_rmb(sellerRole.getRole_rmbA());
 //			trading.setTrad_before_count(count);
 //			trading.setTrad_after_count(count);
 			if (sellerRole.getVip_level() == 0) {
 				sellerRole.setRole_rmbA(sellerRole.getRole_rmbA() - trading.getTrad_poundage() + trading.getTrad_sum());
-				price = trading.getTrad_sum() - trading.getTrad_poundage();
+//				price = trading.getTrad_sum() - trading.getTrad_poundage();
 				trading.setTrad_after_rmb(sellerRole.getRole_rmbA());
 			} else if (sellerRole.getVip_level() == 1) {
 				sellerRole.setRole_rmbA(sellerRole.getRole_rmbA() + trading.getTrad_sum());
-				price = trading.getTrad_sum();
+//				price = trading.getTrad_sum();
 				trading.setTrad_poundage(0);
 				trading.setTrad_after_rmb(sellerRole.getRole_rmbA());
 			}

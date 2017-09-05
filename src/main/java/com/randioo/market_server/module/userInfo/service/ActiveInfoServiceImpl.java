@@ -12,7 +12,6 @@ import com.randioo.market_server.module.Constant;
 import com.randioo.market_server.protocol.ServerMessage.SC;
 import com.randioo.market_server.protocol.UserInfo.ActiveInfoResponse;
 import com.randioo.market_server.util.MD5Util;
-import com.randioo.randioo_server_base.db.GameDB;
 import com.randioo.randioo_server_base.service.ObserveBaseService;
 
 @Service("activeInfoService")
@@ -21,8 +20,8 @@ public class ActiveInfoServiceImpl extends ObserveBaseService implements ActiveI
 	private MemberDAO memberDao;
 	@Autowired
 	private RoleDAO roleDao;
-	@Autowired
-	private GameDB gameDB;
+//	@Autowired
+//	private GameDB gameDB;
 
 	@Override
 	public GeneratedMessage activeAccount(String account, String pwd) {

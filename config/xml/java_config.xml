@@ -47,8 +47,12 @@
 		<item type="int" name="交易数量" code="count" />
 		<item type="string" name="用户" code="user" />
 	</node>
-	<node type="java" xlsx="端口.xlsx" page="port" out="port.tbl"
-		code="PortConfig">
+	<node type="java" xlsx="端口.xlsx" page="port" out="port.tbl" code="PortConfig">
 		<item type="int" name="端口号" code="port" />
+	</node>
+
+	<node type="java" xlsx="调度器定时.xlsx" page="timer" out="time.tbl"
+		code="TimeConfig">
+		<item type="string" name="挂单定时" code="seller" />
 	</node>
 </data>
